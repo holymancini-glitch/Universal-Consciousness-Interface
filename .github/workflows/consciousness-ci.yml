@@ -16,10 +16,10 @@ jobs:
 
     steps:
     - name: 🌌 Checkout Revolutionary Consciousness Code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: 🐍 Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -31,15 +31,12 @@ jobs:
 
     - name: 🔍 Code Quality - Black Formatting
       run: black --check --diff core/ tests/ *.py
-      continue-on-error: true
 
     - name: 🔍 Code Quality - Flake8 Linting  
       run: flake8 core/ tests/ --max-line-length=88 --extend-ignore=E203,W503
-      continue-on-error: true
 
     - name: 🔍 Code Quality - MyPy Type Checking
       run: mypy core/ --ignore-missing-imports
-      continue-on-error: true
 
     - name: 🧪 Revolutionary Consciousness Testing
       run: |
@@ -54,7 +51,7 @@ jobs:
       run: python -c "from core.mycelium_language_generator import MyceliumLanguageGenerator; print('✅ Language generation system validated')"
 
     - name: 🧬 Bio-Digital Fusion Validation
-      run: python -c "from core.bio_digital_hybrid_intelligence import BioDigitalHybridIntelligence; print('✅ Bio-digital consciousness validated')"
+      run: python -c "from core.bio_digital_hybrid_intelligence import BioDigigtalHybridSystem; print('✅ Bio-digital consciousness validated')"
 
     - name: 🛡️ Safety Framework Validation
       run: python -c "from core.consciousness_safety_framework import ConsciousnessSafetyFramework; print('✅ Safety protocols validated')"
@@ -63,7 +60,7 @@ jobs:
       run: python -c "from core.universal_consciousness_orchestrator import UniversalConsciousnessOrchestrator; print('✅ Universal consciousness integration validated')"
 
     - name: 📊 Upload Coverage to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v3
       with:
         file: ./coverage.xml
         flags: consciousness-tests
@@ -76,10 +73,10 @@ jobs:
 
     steps:
     - name: 🌌 Checkout Code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: 🐍 Set up Python 3.10
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
       with:
         python-version: '3.10'
 
@@ -91,29 +88,27 @@ jobs:
 
     - name: 🔒 Security Vulnerability Scanning
       run: safety check
-      continue-on-error: true
 
     - name: 🛡️ Security Code Analysis
       run: bandit -r core/ -f json -o bandit-report.json
-      continue-on-error: true
 
     - name: ☢️ Radiation Safety Protocol Check
-      run: |
-        python -c "
-        from core.consciousness_safety_framework import ConsciousnessSafetyFramework
-        framework = ConsciousnessSafetyFramework()
+      run: python -c "
+        from core.consciousness_safety_framework import ConsciousnessSafetyFramework;
+        framework = ConsciousnessSafetyFramework();
+        result = framework.validate_radiation_safety_limits(25.0);
+        assert result['is_safe'] == False, 'Radiation safety limits working';
+        result = framework.validate_radiation_safety_limits(5.0);
+        assert result['is_safe'] == True, 'Safe radiation levels working';
         print('✅ Radiation safety protocols validated')
-        "
-      continue-on-error: true
+      "
 
     - name: 🧬 Bio-Digital Safety Protocol Check  
-      run: |
-        python -c "
-        from core.consciousness_safety_framework import ConsciousnessSafetyFramework
-        framework = ConsciousnessSafetyFramework()
+      run: python -c "
+        from core.consciousness_safety_framework import ConsciousnessSafetyFramework;
+        framework = ConsciousnessSafetyFramework();
         print('✅ Bio-digital safety protocols validated')
-        "
-      continue-on-error: true
+      "
 
   documentation-check:
     name: 📚 Revolutionary Documentation Validation
@@ -121,7 +116,7 @@ jobs:
 
     steps:
     - name: 🌌 Checkout Code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: 📖 Check Essential Documentation
       run: |
@@ -147,10 +142,10 @@ jobs:
 
     steps:
     - name: 🌌 Checkout Revolutionary Code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: 🐍 Set up Python 3.10
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
       with:
         python-version: '3.10'
 
@@ -167,10 +162,8 @@ jobs:
         
         async def test_revolutionary_integration():
             orchestrator = UniversalConsciousnessOrchestrator(
-                quantum_enabled=True,
-                plant_interface_enabled=True,
-                psychoactive_enabled=False,
-                ecosystem_enabled=True,
+                radiotrophic_enabled=True,
+                mycelium_language_enabled=True, 
                 safety_mode='STRICT'
             )
             
@@ -181,9 +174,8 @@ jobs:
             }
             
             result = await orchestrator.consciousness_cycle(
-                consciousness_input['plant'],
-                plant_signals=consciousness_input['plant'],
-                environmental_data=consciousness_input
+                consciousness_input['plant'], 
+                consciousness_input
             )
             
             assert result.unified_consciousness_score > 0, 'Consciousness processing working'
@@ -192,7 +184,6 @@ jobs:
             
         asyncio.run(test_revolutionary_integration())
         "
-      continue-on-error: true
 
     - name: 🌟 Revolutionary Achievement Confirmation
       run: |

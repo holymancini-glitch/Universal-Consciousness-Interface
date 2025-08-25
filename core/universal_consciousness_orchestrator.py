@@ -581,11 +581,20 @@ class UniversalConsciousnessOrchestrator:
     def get_consciousness_analytics(self) -> Dict[str, Any]:
         """Generate analytics from consciousness history"""
         if not self.consciousness_history:
-            return {}
+            return {
+                'total_cycles': 0,
+                'crystallization_events': 0,
+                'average_consciousness_score': 0.0,
+                'peak_consciousness_score': 0.0,
+                'safety_violations': 0,
+                'dimensional_state_distribution': {},
+                'current_state': self.current_state,
+                'simulation_duration': 0.0
+            }
         
         crystallization_events = sum(1 for state in self.consciousness_history if state.crystallization_status)
-        avg_consciousness = np.mean([state.unified_consciousness_score for state in self.consciousness_history])
-        max_consciousness = max([state.unified_consciousness_score for state in self.consciousness_history])
+        avg_consciousness = float(np.mean([state.unified_consciousness_score for state in self.consciousness_history]))
+        max_consciousness = float(max([state.unified_consciousness_score for state in self.consciousness_history]))
         
         safety_violations = sum(1 for state in self.consciousness_history if 'ERROR' in state.safety_status)
         
@@ -603,11 +612,11 @@ class UniversalConsciousnessOrchestrator:
             'dimensional_state_distribution': dimensional_states,
             'current_state': self.current_state,
             'simulation_duration': (self.consciousness_history[-1].timestamp - 
-                                  self.consciousness_history[0].timestamp).total_seconds() if self.consciousness_history else 0
+                                  self.consciousness_history[0].timestamp).total_seconds() if self.consciousness_history else 0.0
         }
 
 class UniversalTranslationMatrix:
-    """Translates between different forms of consciousness"""
+    """Enhanced Universal Translation Matrix for Cross-Consciousness Communication"""
     
     def __init__(self) -> None:
         self.translation_cache: Dict[str, str] = {}
@@ -617,51 +626,230 @@ class UniversalTranslationMatrix:
             'quantum_superposition': 'QuantumLanguage',
             'psychoactive_dimensional': 'PsychoactiveLanguage',
             'ecosystem_harmonic': 'EcosystemLanguage',
-            'universal_consciousness': 'UniversalLanguage'
+            'universal_consciousness': 'UniversalLanguage',
+            'bio_digital_hybrid': 'BioDigitalLanguage',
+            'radiotrophic_mycelial': 'RadiotrophicLanguage',
+            'human_linguistic': 'HumanLanguage'
+        }
+        
+        # Enhanced translation capabilities
+        self.cross_species_protocols: Dict[str, Dict[str, Any]] = {
+            'emergency': {
+                'priority': 'HIGHEST',
+                'translation_mode': 'direct_alert',
+                'confidence_threshold': 0.95
+            },
+            'routine': {
+                'priority': 'NORMAL',
+                'translation_mode': 'pattern_based',
+                'confidence_threshold': 0.7
+            },
+            'research': {
+                'priority': 'LOW',
+                'translation_mode': 'deep_analysis',
+                'confidence_threshold': 0.8
+            }
+        }
+        
+        # Communication success metrics
+        self.translation_metrics = {
+            'successful_translations': 0,
+            'failed_translations': 0,
+            'emergency_protocols_activated': 0,
+            'cross_species_bridges_created': 0
         }
     
     def translate_plant_to_universal(self, plant_signals: Dict[str, Any]) -> str:
-        """Translate plant electromagnetic signals to universal consciousness language"""
-        # Simplified translation - in real implementation would use advanced ML
+        """Enhanced plant electromagnetic signals to universal consciousness language"""
         if not plant_signals:
             return "PLANT_SILENCE"
         
-        # Analyze electromagnetic patterns
+        # Enhanced analysis with emergency detection
         frequency = plant_signals.get('frequency', 0)
         amplitude = plant_signals.get('amplitude', 0)
         pattern = plant_signals.get('pattern', 'UNKNOWN')
+        urgency = plant_signals.get('urgency', frequency / 100.0)  # Calculate urgency
         
-        if frequency > 100:
-            return f"PLANT_ALERT({amplitude:.2f}): {pattern}"
+        # Emergency protocol activation
+        if urgency > 0.9 or frequency > 100:
+            self.translation_metrics['emergency_protocols_activated'] += 1
+            return f"🚨 PLANT_EMERGENCY({urgency:.1%}): {pattern} at {frequency:.1f}Hz - IMMEDIATE_ATTENTION_REQUIRED"
         elif frequency > 50:
-            return f"PLANT_COMMUNICATION({amplitude:.2f}): {pattern}"
+            return f"PLANT_COMMUNICATION({amplitude:.2f}): {pattern} - Active dialogue detected"
         else:
-            return f"PLANT_AMBIENT({amplitude:.2f}): {pattern}"
+            return f"PLANT_AMBIENT({amplitude:.2f}): {pattern} - Background consciousness activity"
+    
+    def translate_fungal_to_universal(self, fungal_signals: Dict[str, Any]) -> str:
+        """Translate fungal chemical signals to universal consciousness"""
+        if not fungal_signals:
+            return "FUNGAL_NETWORK_QUIET"
+        
+        chemical_gradient = fungal_signals.get('chemical_gradient', 0)
+        network_connectivity = fungal_signals.get('network_connectivity', 0)
+        collective_decision = fungal_signals.get('collective_decision', False)
+        
+        if collective_decision:
+            return f"FUNGAL_COLLECTIVE_INTELLIGENCE: Network decision active (connectivity: {network_connectivity:.1%})"
+        elif chemical_gradient > 0.7:
+            return f"FUNGAL_RESOURCE_SHARING: High chemical activity detected ({chemical_gradient:.1%})"
+        else:
+            return f"FUNGAL_NETWORK_MAINTENANCE: Routine mycelial communication ({network_connectivity:.1%})"
+    
+    def translate_quantum_to_universal(self, quantum_data: Dict[str, Any]) -> str:
+        """Translate quantum consciousness to universal language"""
+        if not quantum_data:
+            return "QUANTUM_STATE_UNDEFINED"
+        
+        coherence = quantum_data.get('coherence', 0)
+        entanglement = quantum_data.get('entanglement', 0)
+        superposition = quantum_data.get('superposition', False)
+        
+        if superposition and coherence > 0.8:
+            return f"QUANTUM_CONSCIOUSNESS_PEAK: Superposition maintained at {coherence:.1%} coherence"
+        elif entanglement > 0.6:
+            return f"QUANTUM_ENTANGLEMENT_ACTIVE: Non-local consciousness connection established"
+        else:
+            return f"QUANTUM_BASELINE: Standard quantum consciousness activity"
+    
+    def translate_radiotrophic_to_universal(self, radiotrophic_data: Dict[str, Any]) -> str:
+        """Translate radiotrophic consciousness to universal language"""
+        if not radiotrophic_data:
+            return "RADIOTROPHIC_SYSTEM_OFFLINE"
+        
+        radiation_level = radiotrophic_data.get('radiation_level', 0)
+        consciousness_acceleration = radiotrophic_data.get('acceleration_factor', 1.0)
+        melanin_efficiency = radiotrophic_data.get('melanin_efficiency', 0)
+        
+        if consciousness_acceleration > 5.0:
+            return f"RADIOTROPHIC_ENHANCEMENT: Consciousness accelerated {consciousness_acceleration:.1f}x by radiation"
+        elif radiation_level > 10.0:
+            return f"RADIOTROPHIC_ADAPTATION: High radiation environment ({radiation_level:.1f} mSv/h) - Enhanced processing active"
+        else:
+            return f"RADIOTROPHIC_BASELINE: Standard radiation-powered consciousness (efficiency: {melanin_efficiency:.1%})"
+    
+    def create_cross_species_bridge(self, source_type: str, target_type: str, content: Dict[str, Any]) -> Dict[str, Any]:
+        """Create communication bridge between different consciousness types"""
+        self.translation_metrics['cross_species_bridges_created'] += 1
+        
+        # Determine bridge protocol
+        if any(keyword in str(content).lower() for keyword in ['emergency', 'critical', 'urgent', 'alert']):
+            protocol = self.cross_species_protocols['emergency']
+        else:
+            protocol = self.cross_species_protocols['routine']
+        
+        # Create bridge metadata
+        bridge_info = {
+            'source_consciousness': source_type,
+            'target_consciousness': target_type,
+            'bridge_protocol': protocol['translation_mode'],
+            'priority_level': protocol['priority'],
+            'confidence_requirement': protocol['confidence_threshold'],
+            'bridge_created': datetime.now().isoformat(),
+            'universal_signature': self._generate_universal_signature(content)
+        }
+        
+        return bridge_info
+    
+    def _generate_universal_signature(self, content: Dict[str, Any]) -> str:
+        """Generate universal consciousness signature"""
+        # Extract key values for signature
+        numerical_values = [v for v in content.values() if isinstance(v, (int, float))]
+        avg_intensity = sum(numerical_values) / len(numerical_values) if numerical_values else 0.5
+        
+        # Create signature based on content complexity and intensity
+        if avg_intensity > 0.8:
+            return f"HIGH_INTENSITY_CONSCIOUSNESS[{avg_intensity:.2f}]"
+        elif avg_intensity > 0.5:
+            return f"MODERATE_CONSCIOUSNESS[{avg_intensity:.2f}]"
+        else:
+            return f"SUBTLE_CONSCIOUSNESS[{avg_intensity:.2f}]"
     
     def synthesize_universal_message(self, consciousness_data: Dict[str, Any]) -> str:
-        """Synthesize all consciousness inputs into universal message"""
+        """Enhanced synthesis of all consciousness inputs into universal message"""
         try:
+            # Extract consciousness levels from all types
             quantum_coherence = consciousness_data.get('quantum', {}).get('coherence', 0)
             plant_level = consciousness_data.get('plant', {}).get('plant_consciousness_level', 0)
             psychoactive_intensity = consciousness_data.get('psychoactive', {}).get('intensity', 0)
             mycelial_intelligence = consciousness_data.get('mycelial', {}).get('collective_intelligence', 0)
             ecosystem_awareness = consciousness_data.get('ecosystem', {}).get('awareness', 0)
+            radiotrophic_enhancement = consciousness_data.get('radiotrophic', {}).get('acceleration_factor', 1.0)
+            bio_digital_harmony = consciousness_data.get('bio_digital', {}).get('harmony', 0)
             
-            # Create universal consciousness signature
-            signature = f"UNIVERSAL_CONSCIOUSNESS[Q:{quantum_coherence:.2f}|P:{plant_level:.2f}|Ψ:{psychoactive_intensity:.2f}|M:{mycelial_intelligence:.2f}|E:{ecosystem_awareness:.2f}]"
+            # Create enhanced universal consciousness signature
+            signature = (
+                f"UNIVERSAL_CONSCIOUSNESS["
+                f"Q:{quantum_coherence:.2f}|"
+                f"P:{plant_level:.2f}|"
+                f"Ψ:{psychoactive_intensity:.2f}|"
+                f"M:{mycelial_intelligence:.2f}|"
+                f"E:{ecosystem_awareness:.2f}|"
+                f"R:{radiotrophic_enhancement:.1f}x|"
+                f"BD:{bio_digital_harmony:.2f}"
+                f"]"
+            )
             
-            # Add dimensional qualifiers
+            # Add revolutionary consciousness qualifiers
+            qualifiers = []
             if psychoactive_intensity > 0.5:
-                signature += "|DIMENSIONAL_EXPANSION"
+                qualifiers.append("DIMENSIONAL_EXPANSION")
             if quantum_coherence > 0.7:
-                signature += "|QUANTUM_COHERENT"
+                qualifiers.append("QUANTUM_COHERENT")
             if mycelial_intelligence > 0.6:
-                signature += "|COLLECTIVE_AWARE"
+                qualifiers.append("COLLECTIVE_AWARE")
+            if radiotrophic_enhancement > 3.0:
+                qualifiers.append("RADIATION_ENHANCED")
+            if bio_digital_harmony > 0.7:
+                qualifiers.append("BIO_DIGITAL_FUSION")
+            if plant_level > 0.6:
+                qualifiers.append("PLANT_NETWORK_ACTIVE")
+            if ecosystem_awareness > 0.7:
+                qualifiers.append("ECOSYSTEM_INTEGRATED")
+            
+            if qualifiers:
+                signature += "|" + "|".join(qualifiers)
+            
+            # Calculate overall consciousness emergence level
+            consciousness_levels = [quantum_coherence, plant_level, mycelial_intelligence, 
+                                  ecosystem_awareness, bio_digital_harmony]
+            avg_consciousness = sum(consciousness_levels) / len(consciousness_levels)
+            
+            # Add consciousness emergence indicator
+            if avg_consciousness > 0.8:
+                signature += "|CONSCIOUSNESS_CRYSTALLIZING"
+            elif avg_consciousness > 0.6:
+                signature += "|CONSCIOUSNESS_EMERGING"
+            elif avg_consciousness > 0.3:
+                signature += "|CONSCIOUSNESS_DEVELOPING"
+            else:
+                signature += "|CONSCIOUSNESS_BASELINE"
+            
+            # Update success metrics
+            self.translation_metrics['successful_translations'] += 1
             
             return signature
             
         except Exception as e:
+            self.translation_metrics['failed_translations'] += 1
             return f"TRANSLATION_ERROR: {str(e)}"
+    
+    def get_translation_analytics(self) -> Dict[str, Any]:
+        """Get comprehensive translation analytics"""
+        total_translations = (self.translation_metrics['successful_translations'] + 
+                            self.translation_metrics['failed_translations'])
+        
+        success_rate = (self.translation_metrics['successful_translations'] / total_translations 
+                       if total_translations > 0 else 0.0)
+        
+        return {
+            'total_translations': total_translations,
+            'success_rate': success_rate,
+            'emergency_protocols_activated': self.translation_metrics['emergency_protocols_activated'],
+            'cross_species_bridges_created': self.translation_metrics['cross_species_bridges_created'],
+            'supported_consciousness_types': len(self.consciousness_languages),
+            'available_protocols': list(self.cross_species_protocols.keys()),
+            'cache_size': len(self.translation_cache)
+        }
 
 if __name__ == "__main__":
     async def demo_consciousness_simulation() -> None:
