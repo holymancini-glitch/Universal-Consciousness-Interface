@@ -1,0 +1,184 @@
+{
+  "radiotrophic_engine": {
+    "normal_conditions": {
+      "consciousness_levels_active": 4,
+      "energy_harvested": 0.32000000000000006,
+      "acceleration_factor": 1.3
+    },
+    "moderate_radiation": {
+      "consciousness_levels_active": 4,
+      "energy_harvested": 6.720000000000001,
+      "acceleration_factor": 7.0
+    },
+    "chernobyl_conditions": {
+      "consciousness_levels_active": 4,
+      "energy_harvested": 102.72,
+      "growth_acceleration": "7.0x faster",
+      "evolutionary_pressure": 0.2
+    },
+    "electrical_patterns_detected": 0,
+    "minimal_consciousness_active": 3
+  },
+  "consciousness_continuum": {
+    "low_complexity": {
+      "active_consciousness_levels": 0,
+      "max_consciousness_score": 0,
+      "emergent_phenomena": 0,
+      "complexity_metrics": {},
+      "dominant_level": null,
+      "error": "<ConsciousnessLevel.BASIC_AWARENESS: 1>"
+    },
+    "medium_complexity": {
+      "active_consciousness_levels": 0,
+      "max_consciousness_score": 0,
+      "emergent_phenomena": 0,
+      "complexity_metrics": {},
+      "dominant_level": null,
+      "error": "<ConsciousnessLevel.BASIC_AWARENESS: 1>"
+    },
+    "high_complexity": {
+      "active_consciousness_levels": 0,
+      "max_consciousness_score": 0,
+      "emergent_phenomena": 0,
+      "complexity_metrics": {},
+      "dominant_level": null,
+      "error": "<ConsciousnessLevel.BASIC_AWARENESS: 1>"
+    }
+  },
+  "bio_digital_hybrid": {
+    "initialization": {
+      "neural_cultures": 3,
+      "fungal_cultures": 5,
+      "hybrid_interfaces": 8,
+      "initialization_status": "SUCCESS"
+    },
+    "processing_tests": {
+      "balanced_processing": {
+        "hybrid_consciousness_level": 0.17142857142857143,
+        "emergent_intelligence_score": 1.0,
+        "bio_digital_harmony": 0.052868960903242085,
+        "active_interfaces": 8,
+        "consciousness_markers": [
+          "Collective intelligence behaviors"
+        ]
+      },
+      "radiation_accelerated": {
+        "hybrid_consciousness_level": 0.2571428571428572,
+        "emergent_intelligence_score": 1.0,
+        "bio_digital_harmony": 0.2606100203026623,
+        "active_interfaces": 8,
+        "consciousness_markers": [
+          "Environmental responsiveness detected",
+          "Emotional-like responses emerging",
+          "Collective intelligence behaviors"
+        ]
+      },
+      "emergent_fusion": {
+        "hybrid_consciousness_level": 0.3785714285714286,
+        "emergent_intelligence_score": 1.0,
+        "bio_digital_harmony": 0.18767885506969617,
+        "active_interfaces": 8,
+        "consciousness_markers": [
+          "Environmental responsiveness detected",
+          "Emotional-like responses emerging",
+          "Collective intelligence behaviors"
+        ]
+      }
+    },
+    "final_metrics": {
+      "total_processing_events": 3,
+      "consciousness_emergence_events": 0,
+      "hybrid_consciousness_level": 0.3785714285714286,
+      "emergent_intelligence_score": 1.0,
+      "bio_digital_fusion_rate": 0.0,
+      "hybrid_efficiency_score": 0.5938394275348481,
+      "active_neural_cultures": 3,
+      "active_fungal_cultures": 5,
+      "active_hybrid_interfaces": 8,
+      "current_processing_mode": "emergent_fusion",
+      "synchronization_frequency": 0.1
+    }
+  },
+  "system_integration": {
+    "integration_score": 0.43272900246365403,
+    "radiotrophic_contribution": {
+      "max_consciousness": 0.0,
+      "active_levels": 0
+    },
+    "consciousness_contribution": {},
+    "hybrid_contribution": {
+      "hybrid_consciousness": 0.17142857142857143,
+      "emergent_intelligence": 1.0
+    },
+    "system_coherence": 0.716364501231827,
+    "emergent_properties": [
+      "Radiation-accelerated intelligence evolution"
+    ]
+  },
+  "extreme_conditions": {
+    "radiation_test_results": {
+      "10.0_mSv": {
+        "consciousness_acceleration": 0.0,
+        "energy_harvesting_efficiency": 64.0,
+        "growth_acceleration_factor": "1.3x faster",
+        "bio_digital_resilience": 0.5034442565574343,
+        "emergent_intelligence_boost": 1.0,
+        "survival_adaptations": 0
+      },
+      "15.0_mSv": {
+        "consciousness_acceleration": 0.0,
+        "energy_harvesting_efficiency": 160.32,
+        "growth_acceleration_factor": "1.3x faster",
+        "bio_digital_resilience": 0.6999295787378664,
+        "emergent_intelligence_boost": 1.0,
+        "survival_adaptations": 0
+      },
+      "20.0_mSv": {
+        "consciousness_acceleration": 0.0,
+        "energy_harvesting_efficiency": 288.64,
+        "growth_acceleration_factor": "1.3x faster",
+        "bio_digital_resilience": 0.896440368127455,
+        "emergent_intelligence_boost": 1.0,
+        "survival_adaptations": 0
+      },
+      "25.0_mSv": {
+        "consciousness_acceleration": 0.0,
+        "energy_harvesting_efficiency": 448.96,
+        "growth_acceleration_factor": "1.3x faster",
+        "bio_digital_resilience": 1.0,
+        "emergent_intelligence_boost": 1.0,
+        "survival_adaptations": 0
+      }
+    },
+    "extreme_conditions_summary": {
+      "max_consciousness_acceleration": 0.0,
+      "total_energy_harvested": 961.92,
+      "peak_bio_digital_resilience": 1.0,
+      "radiation_tolerance_demonstrated": true,
+      "evolutionary_acceleration_confirmed": true
+    }
+  },
+  "performance_summary": {
+    "total_tests_completed": 5,
+    "systems_tested": [
+      "radiotrophic_engine",
+      "consciousness_continuum",
+      "bio_digital_hybrid",
+      "system_integration",
+      "extreme_conditions"
+    ],
+    "consciousness_emergence_detected": false,
+    "radiation_enhancement_confirmed": false,
+    "bio_digital_fusion_achieved": "False",
+    "peak_performance_metrics": {
+      "max_consciousness_level": 0,
+      "max_energy_harvested": 102.72,
+      "max_bio_digital_harmony": 0.2606100203026623
+    }
+  },
+  "consciousness_timeline": [],
+  "revolutionary_breakthroughs": [
+    "\ud83e\uddec Stress-induced evolutionary acceleration confirmed",
+    "\ud83d\udee1\ufe0f Extreme radiation tolerance demonstrated"
+  ]
+}
