@@ -93,22 +93,22 @@ jobs:
       run: bandit -r core/ -f json -o bandit-report.json
 
     - name: ☢️ Radiation Safety Protocol Check
-      shell: python
-      run: |
-        from core.consciousness_safety_framework import ConsciousnessSafetyFramework
-        framework = ConsciousnessSafetyFramework()
-        result = framework.validate_radiation_safety_limits(25.0)
-        assert result['is_safe'] == False, 'Radiation safety limits working'
-        result = framework.validate_radiation_safety_limits(5.0)
-        assert result['is_safe'] == True, 'Safe radiation levels working'
+      run: python -c "
+        from core.consciousness_safety_framework import ConsciousnessSafetyFramework;
+        framework = ConsciousnessSafetyFramework();
+        result = framework.validate_radiation_safety_limits(25.0);
+        assert result['is_safe'] == False, 'Radiation safety limits working';
+        result = framework.validate_radiation_safety_limits(5.0);
+        assert result['is_safe'] == True, 'Safe radiation levels working';
         print('✅ Radiation safety protocols validated')
+      "
 
-    - name: 🧬 Bio-Digital Safety Protocol Check
-      shell: python
-      run: |
-        from core.consciousness_safety_framework import ConsciousnessSafetyFramework
-        framework = ConsciousnessSafetyFramework()
+    - name: 🧬 Bio-Digital Safety Protocol Check  
+      run: python -c "
+        from core.consciousness_safety_framework import ConsciousnessSafetyFramework;
+        framework = ConsciousnessSafetyFramework();
         print('✅ Bio-digital safety protocols validated')
+      "
 
   documentation-check:
     name: 📚 Revolutionary Documentation Validation
@@ -155,8 +155,8 @@ jobs:
         pip install -r requirements.txt
 
     - name: 🍄☢️ Revolutionary Integration Test
-      shell: python
       run: |
+        python -c "
         import asyncio
         from core.universal_consciousness_orchestrator import UniversalConsciousnessOrchestrator
         
@@ -183,6 +183,7 @@ jobs:
             print('🎆 Revolutionary integration validated!')
             
         asyncio.run(test_revolutionary_integration())
+        "
 
     - name: 🌟 Revolutionary Achievement Confirmation
       run: |
