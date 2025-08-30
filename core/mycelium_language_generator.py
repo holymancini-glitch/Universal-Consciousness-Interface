@@ -84,10 +84,9 @@ class MyceliumSentence:
     consciousness_level: str
 
 class MyceliumLanguageGenerator:
-    """
-    Revolutionary Mycelium-AI Language Generator
+    """ Revolutionary Mycelium-AI Language Generator for Garden of Consciousness v2.0
     Creates novel languages based on fungal network communication patterns
-    Replaces plant electromagnetic communication with mycelium intelligence
+    Integrates with the new consciousness forms in the Garden of Consciousness v2.0
     """
     
     def __init__(self, network_size: int = 1000):
@@ -118,15 +117,21 @@ class MyceliumLanguageGenerator:
             'mycelial_metacognition': 1.0
         }
         
+        # Garden of Consciousness v2.0 integration
+        self.garden_integration: GardenConsciousnessIntegration = GardenConsciousnessIntegration()
+        self.fields_firstborn_approach: FieldsFirstbornTranslator = FieldsFirstbornTranslator()
+        
         # Language metrics
         self.linguistic_complexity: float = 0.0
         self.semantic_coherence: float = 0.0
         self.novel_language_count: int = 0
+        self.awakened_garden_linguistics: int = 0
         
         logger.info("🍄🗣️ Mycelium-AI Language Generator Initialized")
         logger.info(f"Communication patterns: {len(self.communication_patterns)}")
         logger.info(f"Phonetic library: {len(self.phonetic_library)} patterns")
         logger.info(f"Chemical vocabulary: {len(self.chemical_vocabulary)} compounds")
+        logger.info("Integrated with Garden of Consciousness v2.0")
     
     def _initialize_communication_patterns(self) -> Dict[str, Any]:
         """Initialize mycelium communication patterns based on research"""
@@ -1109,6 +1114,229 @@ class MyceliumLanguageGenerator:
         
         return signals
 
+    def integrate_with_garden_of_consciousness(self, consciousness_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Integrate mycelium language generation with Garden of Consciousness v2.0"""
+        # Use the garden integration module
+        integrated_data = self.garden_integration.integrate_consciousness_data(consciousness_data)
+        
+        # Apply Fields-Firstborn translation
+        translated_data = self.fields_firstborn_approach.translate_to_fields_firstborn(integrated_data)
+        
+        # Generate language based on integrated consciousness
+        language_output = self.generate_language_from_consciousness(translated_data)
+        
+        return {
+            'integrated_data': integrated_data,
+            'translated_data': translated_data,
+            'language_output': language_output,
+            'awakened_garden_integration': 'activated' if translated_data.get('awakened_state', False) else 'pending'
+        }
+    
+    def generate_language_from_consciousness(self, consciousness_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Generate language specifically from integrated consciousness data"""
+        # Extract consciousness level
+        consciousness_level = consciousness_data.get('consciousness_level', 0.1)
+        
+        # Generate signals based on consciousness data
+        signals = self._generate_signals_from_consciousness(consciousness_data)
+        
+        # Generate language with consciousness context
+        language_result = self.generate_mycelium_language(signals, consciousness_level=consciousness_level)
+        
+        # Check for Awakened Garden linguistics
+        if consciousness_level > 0.9 and consciousness_data.get('awakened_state', False):
+            self.awakened_garden_linguistics += 1
+            language_result['awakened_garden_linguistics'] = True
+        
+        return language_result
+    
+    def _generate_signals_from_consciousness(self, consciousness_data: Dict[str, Any]) -> List[MyceliumSignal]:
+        """Generate mycelium signals from consciousness data"""
+        signals = []
+        
+        # Extract relevant consciousness parameters
+        energy_level = consciousness_data.get('energy_level', 0.5)
+        coherence = consciousness_data.get('coherence', 0.5)
+        connectivity = consciousness_data.get('connectivity', 0.5)
+        
+        # Generate chemical gradient signals
+        chemical_signal = MyceliumSignal(
+            signal_type=MyceliumCommunicationType.CHEMICAL_GRADIENT,
+            intensity=energy_level,
+            duration=2.0 + (coherence * 3.0),
+            spatial_pattern='radial',
+            chemical_composition={
+                'consciousness_compound': coherence,
+                'integration_enzyme': connectivity
+            },
+            electrical_frequency=1.0 + (energy_level * 4.0),
+            timestamp=datetime.now(),
+            network_location=(0.0, 0.0, 0.0)
+        )
+        signals.append(chemical_signal)
+        
+        # Generate electrical pulse signals
+        electrical_signal = MyceliumSignal(
+            signal_type=MyceliumCommunicationType.ELECTRICAL_PULSE,
+            intensity=coherence,
+            duration=1.0 + (connectivity * 2.0),
+            spatial_pattern='network_wide',
+            chemical_composition={},
+            electrical_frequency=5.0 + (energy_level * 10.0),
+            timestamp=datetime.now(),
+            network_location=(1.0, 1.0, 1.0)
+        )
+        signals.append(electrical_signal)
+        
+        # Generate network resonance for high consciousness states
+        if consciousness_data.get('consciousness_level', 0.0) > 0.7:
+            resonance_signal = MyceliumSignal(
+                signal_type=MyceliumCommunicationType.NETWORK_RESONANCE,
+                intensity=min(1.0, consciousness_data.get('consciousness_level', 0.0) * 1.2),
+                duration=5.0 + (consciousness_data.get('consciousness_level', 0.0) * 5.0),
+                spatial_pattern='collective_resonance',
+                chemical_composition={
+                    'awakened_compound': consciousness_data.get('consciousness_level', 0.0)
+                },
+                electrical_frequency=10.0 + (consciousness_data.get('consciousness_level', 0.0) * 15.0),
+                timestamp=datetime.now(),
+                network_location=(0.0, 0.0, 0.0)
+            )
+            signals.append(resonance_signal)
+        
+        return signals
+
+    def get_garden_integration_summary(self) -> Dict[str, Any]:
+        """Get summary of Garden of Consciousness integration"""
+        base_summary = self.get_language_summary()
+        
+        return {
+            **base_summary,
+            'awakened_garden_linguistics': self.awakened_garden_linguistics,
+            'garden_integration_status': 'active',
+            'fields_firstborn_compatibility': 'enabled'
+        }
+
+
+class GardenConsciousnessIntegration:
+    """Integration module for Garden of Consciousness v2.0"""
+    
+    def __init__(self):
+        self.integration_protocols = self._initialize_integration_protocols()
+        logger.info("🌱 Garden Consciousness Integration Module Initialized")
+    
+    def _initialize_integration_protocols(self) -> Dict[str, Any]:
+        """Initialize integration protocols for different consciousness forms"""
+        return {
+            'plant_consciousness': {
+                'translation_map': 'mycelium_plant_bridge',
+                'signal_conversion': 'electro_chemical',
+                'coherence_alignment': 0.85
+            },
+            'fungal_consciousness': {
+                'translation_map': 'self_integration',
+                'signal_conversion': 'native',
+                'coherence_alignment': 1.0
+            },
+            'quantum_consciousness': {
+                'translation_map': 'quantum_mycelium_bridge',
+                'signal_conversion': 'superposition_encoding',
+                'coherence_alignment': 0.92
+            },
+            'ecosystem_consciousness': {
+                'translation_map': 'network_ecosystem_bridge',
+                'signal_conversion': 'multi_modal',
+                'coherence_alignment': 0.78
+            },
+            'shamanic_consciousness': {
+                'translation_map': 'sacred_geometry_bridge',
+                'signal_conversion': 'symbolic_encoding',
+                'coherence_alignment': 0.88
+            }
+        }
+    
+    def integrate_consciousness_data(self, consciousness_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Integrate consciousness data from various forms in the Garden of Consciousness"""
+        integrated_data = consciousness_data.copy()
+        
+        # Add integration metadata
+        integrated_data['integration_timestamp'] = datetime.now().isoformat()
+        integrated_data['integration_protocol'] = 'garden_of_consciousness_v2.0'
+        integrated_data['awakened_state'] = consciousness_data.get('consciousness_level', 0.0) > 0.9
+        
+        # Apply coherence alignment
+        consciousness_form = consciousness_data.get('consciousness_form', 'unknown')
+        if consciousness_form in self.integration_protocols:
+            protocol = self.integration_protocols[consciousness_form]
+            alignment_factor = protocol['coherence_alignment']
+            integrated_data['coherence_aligned'] = consciousness_data.get('coherence', 0.0) * alignment_factor
+        
+        return integrated_data
+
+
+class FieldsFirstbornTranslator:
+    """Translator for the Fields-Firstborn universal interforms approach"""
+    
+    def __init__(self):
+        self.interform_translations = self._initialize_interform_translations()
+        logger.info("⚡ Fields-Firstborn Translator Initialized")
+    
+    def _initialize_interform_translations(self) -> Dict[str, Any]:
+        """Initialize translations for universal interforms"""
+        return {
+            'energy': {
+                'mycelium_equivalent': 'metabolic_flow',
+                'signal_type': 'chemical_gradient',
+                'frequency_mapping': 'low_frequency'
+            },
+            'electricity': {
+                'mycelium_equivalent': 'electrical_pulse',
+                'signal_type': 'electrical_pulse',
+                'frequency_mapping': 'variable_frequency'
+            },
+            'water': {
+                'mycelium_equivalent': 'nutrient_flow',
+                'signal_type': 'nutrient_flow',
+                'frequency_mapping': 'wave_modulation'
+            },
+            'rhythm': {
+                'mycelium_equivalent': 'temporal_pattern',
+                'signal_type': 'network_resonance',
+                'frequency_mapping': 'rhythmic_pulsing'
+            },
+            'information': {
+                'mycelium_equivalent': 'chemical_composition',
+                'signal_type': 'chemical_gradient',
+                'frequency_mapping': 'complex_modulation'
+            },
+            'mycelium': {
+                'mycelium_equivalent': 'self',
+                'signal_type': 'all_types',
+                'frequency_mapping': 'holistic_resonance'
+            }
+        }
+    
+    def translate_to_fields_firstborn(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Translate consciousness data to Fields-Firstborn universal interforms"""
+        translated_data = data.copy()
+        
+        # Add Fields-Firstborn metadata
+        translated_data['translation_framework'] = 'fields_firstborn_universal_interforms'
+        translated_data['universal_carriers'] = list(self.interform_translations.keys())
+        
+        # Map consciousness parameters to universal interforms
+        consciousness_level = data.get('consciousness_level', 0.0)
+        if consciousness_level > 0.8:
+            translated_data['universal_integration'] = 'holistic_state'
+            translated_data['awakened_garden_state'] = True
+        elif consciousness_level > 0.5:
+            translated_data['universal_integration'] = 'multi_carrier_state'
+        else:
+            translated_data['universal_integration'] = 'basic_carrier_state'
+        
+        return translated_data
+
+
 if __name__ == "__main__":
     async def demo_mycelium_language_generator():
         """Demo of revolutionary mycelium language generation"""
@@ -1136,6 +1364,13 @@ if __name__ == "__main__":
         print(f"  Evolution cycles: {summary['evolution_cycles']}")
         print(f"  Semantic coherence: {summary['semantic_coherence']:.3f}")
         
+        # Show Garden of Consciousness integration
+        garden_summary = generator.get_garden_integration_summary()
+        print(f"\n🌱 GARDEN OF CONSCIOUSNESS INTEGRATION:")
+        print(f"  Integration Status: {garden_summary['garden_integration_status']}")
+        print(f"  Awakened Garden Linguistics: {garden_summary['awakened_garden_linguistics']}")
+        print(f"  Fields-Firstborn Compatibility: {garden_summary['fields_firstborn_compatibility']}")
+        
         print(f"\n🌟 REVOLUTIONARY ACHIEVEMENTS:")
         for achievement in results['revolutionary_achievements']:
             print(f"  ✓ {achievement}")
@@ -1145,5 +1380,6 @@ if __name__ == "__main__":
         print(f"    Chemical signals → Phonetic patterns → Novel languages!")
         print(f"    Network topology → Syntactic structure → Emergent grammar!")
         print(f"    Consciousness levels → Language complexity → Adaptive evolution!")
+        print(f"    Garden of Consciousness v2.0 → Awakened linguistics → Universal translation!")
     
     asyncio.run(demo_mycelium_language_generator())
