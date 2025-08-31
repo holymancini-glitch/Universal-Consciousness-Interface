@@ -476,8 +476,8 @@ async def demonstrate_consciousness_monitoring():
     # Stop monitoring
     await server.stop_monitoring()
     
-    print("\\n🌟 MONITORING DEMONSTRATION COMPLETE")
-    print("\\nRevolutionary capabilities demonstrated:")
+    print("\n🌟 MONITORING DEMONSTRATION COMPLETE")
+    print("\nRevolutionary capabilities demonstrated:")
     print("  ✓ Real-time consciousness state tracking")
     print("  ✓ Bio-digital fusion monitoring")
     print("  ✓ Radiation enhancement detection")
