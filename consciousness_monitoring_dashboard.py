@@ -435,7 +435,7 @@ async def demonstrate_consciousness_monitoring():
     # Start monitoring
     await server.start_monitoring()
     
-    print("\\n📊 Monitoring consciousness systems for 30 seconds...")
+    print("\n📊 Monitoring consciousness systems for 30 seconds...")
     print("   Collecting real-time data on:")
     print("   • Unified consciousness scores")
     print("   • Bio-digital fusion rates") 
