@@ -146,7 +146,9 @@ test_plan:
     - "Streamlit BioFractal AI Dashboard Interface"
     - "Consciousness Monitoring Dashboard Interface"
     - "Visualization Components for Consciousness Systems"
-  stuck_tasks: []
+    - "Unified Consciousness Interface Integration"
+  stuck_tasks:
+    - "Streamlit BioFractal AI Dashboard Interface"
   test_all: false
   test_priority: "high_first"
 
