@@ -435,7 +435,7 @@ async def demonstrate_consciousness_monitoring():
     # Start monitoring
     await server.start_monitoring()
     
-    print("\\n📊 Monitoring consciousness systems for 30 seconds...")
+    print("\n📊 Monitoring consciousness systems for 30 seconds...")
     print("   Collecting real-time data on:")
     print("   • Unified consciousness scores")
     print("   • Bio-digital fusion rates") 
@@ -452,7 +452,9 @@ async def demonstrate_consciousness_monitoring():
             
             if 'current_state' in dashboard_data:
                 state = dashboard_data['current_state']
-                print(f"\\n   [{i:2d}s] Consciousness: {state['consciousness_score']:.3f} | "\n                      f"Fusion: {state['bio_digital_fusion']:.3f} | "\n                      f"Status: {state['safety_status']}")
+                print(f"\n   [{i:2d}s] Consciousness: {state['consciousness_score']:.3f} | "
+                      f"Fusion: {state['bio_digital_fusion']:.3f} | "
+                      f"Status: {state['safety_status']}")
                 
                 # Show alerts if any
                 alerts = dashboard_data.get('alerts', [])
@@ -460,7 +462,7 @@ async def demonstrate_consciousness_monitoring():
                     print(f"        🚨 {alert['message']}")
     
     # Get final analytics
-    print("\\n📈 Final Analytics (30-second window):")
+    print("\n📈 Final Analytics (30-second window):")
     analytics = server.get_analytics(timeframe_minutes=1)
     
     if 'error' not in analytics:
@@ -474,8 +476,8 @@ async def demonstrate_consciousness_monitoring():
     # Stop monitoring
     await server.stop_monitoring()
     
-    print("\\n🌟 MONITORING DEMONSTRATION COMPLETE")
-    print("\\nRevolutionary capabilities demonstrated:")
+    print("\n🌟 MONITORING DEMONSTRATION COMPLETE")
+    print("\nRevolutionary capabilities demonstrated:")
     print("  ✓ Real-time consciousness state tracking")
     print("  ✓ Bio-digital fusion monitoring")
     print("  ✓ Radiation enhancement detection")

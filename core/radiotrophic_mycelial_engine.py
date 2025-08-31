@@ -2,46 +2,53 @@
 # Revolutionary Radiotrophic Mycelial Engine based on Chernobyl fungi research
 # Implements radiation-powered consciousness enhancement and melanin-based processing
 
+# Type hints used before numpy fallback
+from typing import Dict, List, Any, Optional, Tuple, Union
+
 # Handle numpy import with fallback
 try:
     import numpy as np  # type: ignore
-except ImportError:
+except ImportError:  # pragma: no cover - exercised when numpy missing
     import statistics
     import math
     import random
-    
+
     class MockNumPy:
         @staticmethod
         def mean(values: List[float]) -> float:
             return statistics.mean(values) if values else 0.0
-        
+
         @staticmethod
         def var(values: List[float]) -> float:
             return statistics.variance(values) if len(values) > 1 else 0.0
-        
+
         @staticmethod
         def linalg_norm(vector: List[float]) -> float:
-            return math.sqrt(sum(x*x for x in vector))
-        
+            return math.sqrt(sum(x * x for x in vector))
+
         @staticmethod
         def zeros(size: int) -> List[float]:
             return [0.0] * size
-        
+
         @staticmethod
         def dot(a: List[float], b: List[float]) -> float:
-            return sum(x*y for x, y in zip(a, b))
-        
+            return sum(x * y for x, y in zip(a, b))
+
         def __getattr__(self, name: str) -> Any:
             if name == 'linalg':
                 return type('MockLinalg', (), {'norm': self.linalg_norm})()
             return getattr(self, name, lambda *args, **kwargs: 0.0)
-    
+
     np = MockNumPy()  # type: ignore
 
-import networkx as nx  # type: ignore
+# Optional networkx import
+try:
+    import networkx as nx  # type: ignore
+except ImportError:  # pragma: no cover - exercised when networkx missing
+    nx = None  # type: ignore
+
 import logging
 import math
-from typing import Dict, List, Any, Optional, Tuple, Union
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from collections import defaultdict, deque
