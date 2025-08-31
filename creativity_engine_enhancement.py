@@ -624,8 +624,9 @@ class CreativityEngine:
         goal_completion_rate = len(self.completed_goals) / total_goals if total_goals > 0 else 0.0
         
         # Creative diversity (number of unique approaches)
+        recent_solutions_for_diversity = list(self.solution_history)[-50:]  # Last 50 solutions
         unique_approaches = len(set([sol.concept.get('approach', 'unknown') 
-                                   for sol in self.solution_history[-50:]]))  # Last 50 solutions
+                                   for sol in recent_solutions_for_diversity]))
         creative_diversity = min(1.0, unique_approaches / 10.0)
         
         # Intentionality score (how well solutions match goals)
