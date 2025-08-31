@@ -587,6 +587,10 @@ class ConsciousnessSystemTester:
                     {'loss': 0.25},
                     {'loss': 0.2}
                 ]
+                # Mock optimizer with param_groups
+                self.optimizer = type('MockOptimizer', (), {
+                    'param_groups': [{'lr': 0.001}]
+                })()
             
             def evaluate_prediction_accuracy(self):
                 return 0.7
