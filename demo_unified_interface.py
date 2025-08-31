@@ -27,6 +27,7 @@ tests can validate the individual processing stages.
 
 from __future__ import annotations
 
+import argparse
 import logging
 import math
 import random
@@ -190,4 +191,18 @@ def main(iterations: int = 5, delay: float = 0.5) -> None:
 
 
 if __name__ == "__main__":  # pragma: no cover - manual execution only
-    main()
+    parser = argparse.ArgumentParser(description="Run the unified consciousness demo")
+    parser.add_argument(
+        "--iterations",
+        type=int,
+        default=5,
+        help="Number of iterations to run",
+    )
+    parser.add_argument(
+        "--delay",
+        type=float,
+        default=0.5,
+        help="Delay in seconds between iterations",
+    )
+    args = parser.parse_args()
+    main(iterations=args.iterations, delay=args.delay)
