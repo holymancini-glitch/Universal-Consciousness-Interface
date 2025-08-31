@@ -602,6 +602,9 @@ class ConsciousnessSystemTester:
                 self.coherence_score = 0.7
         
         class MockFeedbackLoop:
+            def __init__(self):
+                self.base_adaptation_rate = 0.1
+                
             def get_adaptation_efficiency(self):
                 return 0.6
         
