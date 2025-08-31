@@ -362,7 +362,7 @@ class ConsciousnessSystemTester:
         try:
             # Test import
             from creativity_engine_enhancement import (
-                CreativityEngine, CreativityMode, CreativeGoal, CreativeMetrics
+                CreativityEngine, CreativityMode, CreativeGoal, CreativityMetrics
             )
             print("   ✅ Import successful")
             
