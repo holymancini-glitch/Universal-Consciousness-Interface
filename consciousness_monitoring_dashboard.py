@@ -462,7 +462,7 @@ async def demonstrate_consciousness_monitoring():
                     print(f"        🚨 {alert['message']}")
     
     # Get final analytics
-    print("\\n📈 Final Analytics (30-second window):")
+    print("\n📈 Final Analytics (30-second window):")
     analytics = server.get_analytics(timeframe_minutes=1)
     
     if 'error' not in analytics:
