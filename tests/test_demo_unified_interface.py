@@ -2,6 +2,7 @@
 
 import os
 import sys
+import subprocess
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
@@ -34,3 +35,16 @@ def test_pipeline_state_output():
     metrics = run_demo_step()
     assert metrics.state in ConsciousnessRecognizer.STATES
     assert 0.0 <= metrics.signal_strength <= 1.0
+
+
+def test_cli_argument_parsing():
+    script = os.path.join(os.path.dirname(os.path.dirname(__file__)), "demo_unified_interface.py")
+    result = subprocess.run(
+        [sys.executable, script, "--iterations", "2", "--delay", "0"],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    # Logging is directed to stderr; count iteration lines
+    lines = [line for line in result.stderr.splitlines() if "Signal strength" in line]
+    assert len(lines) == 2
