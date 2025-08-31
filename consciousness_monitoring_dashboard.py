@@ -452,7 +452,9 @@ async def demonstrate_consciousness_monitoring():
             
             if 'current_state' in dashboard_data:
                 state = dashboard_data['current_state']
-                print(f"\\n   [{i:2d}s] Consciousness: {state['consciousness_score']:.3f} | "\n                      f"Fusion: {state['bio_digital_fusion']:.3f} | "\n                      f"Status: {state['safety_status']}")
+                print(f"\n   [{i:2d}s] Consciousness: {state['consciousness_score']:.3f} | "
+                      f"Fusion: {state['bio_digital_fusion']:.3f} | "
+                      f"Status: {state['safety_status']}")
                 
                 # Show alerts if any
                 alerts = dashboard_data.get('alerts', [])
