@@ -589,6 +589,9 @@ class ConsciousnessSystemTester:
                     {'loss': 0.25},
                     {'loss': 0.2}
                 ]
+            
+            def evaluate_prediction_accuracy(self):
+                return 0.7
         
         class MockSelfModel:
             def __init__(self):
