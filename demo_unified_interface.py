@@ -147,13 +147,21 @@ class RealTimeMonitor:
 # Integration pipeline
 # ---------------------------------------------------------------------------
 class UnifiedDemoPipeline:
-    """Coordinates the processors and recognisers into a single pipeline."""
+    """Coordinates the processors and recognisers into a single pipeline.
 
-    def __init__(self) -> None:
+    Parameters
+    ----------
+    monitor:
+        Optional monitor instance. It must provide a ``display`` method that
+        accepts :class:`ConsciousnessMetrics`. If omitted a
+        :class:`RealTimeMonitor` is used.
+    """
+
+    def __init__(self, monitor=None) -> None:
         self.bio_processor = BioDigitalProcessor()
         self.fractal_recogniser = FractalPatternRecognizer()
         self.consciousness_recogniser = ConsciousnessRecognizer()
-        self.monitor = RealTimeMonitor()
+        self.monitor = monitor if monitor is not None else RealTimeMonitor()
 
     def run_step(self) -> ConsciousnessMetrics:
         """Run a single pipeline step and return the metrics."""
