@@ -1,0 +1,60 @@
+# Default Configuration for Universal Consciousness Interface
+
+# Core System Configuration
+system:
+  name: "Universal Consciousness Interface"
+  version: "1.0.0"
+  log_level: "INFO"
+
+# Consciousness Orchestrator Configuration
+orchestrator:
+  quantum_enabled: true
+  plant_interface_enabled: true
+  psychoactive_enabled: false
+  ecosystem_enabled: true
+  safety_mode: "STRICT"
+  processing_mode: "BALANCED_HYBRID"
+
+# Radiotrophic System Configuration
+radiotrophic:
+  max_nodes: 1000
+  vector_dim: 128
+  melanin_concentration_base: 0.8
+  radiation_safety_limit: 25.0  # mSv/h
+
+# Mycelium Language Generator Configuration
+language_generator:
+  network_size: 1000
+  max_words_per_sentence: 20
+  consciousness_adaptation: true
+
+# Bio-Digital Hybrid Configuration
+bio_digital:
+  neural_cultures: 3
+  fungal_cultures: 5
+  synchronization_frequency: 0.1  # Hz
+
+# Plant Communication Configuration
+plant_communication:
+  signal_processing_enabled: true
+  translation_enabled: true
+  max_frequency: 10000  # Hz
+
+# Ecosystem Consciousness Configuration
+ecosystem:
+  awareness_enabled: true
+  gaia_pattern_detection: true
+  environmental_monitoring: true
+
+# Safety Framework Configuration
+safety:
+  monitoring_active: true
+  emergency_shutdown_enabled: true
+  radiation_monitoring: true
+  biological_safety: true
+
+# Performance Configuration
+performance:
+  async_processing: true
+  cache_enabled: true
+  memory_limit_mb: 1024

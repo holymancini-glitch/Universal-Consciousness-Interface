@@ -34,33 +34,6 @@ random                     # Randomization support (built-in)
 statistics                 # Statistical analysis (built-in)
 math                       # Mathematical functions (built-in)
 
-# Optional Advanced Dependencies (for full bio-digital integration)
-# Uncomment for enhanced capabilities:
-
-# Bio-Digital Hybrid Intelligence
-# neuromorphic>=0.1.0         # Neuromorphic computing simulation
-# bioprocessing>=0.2.0        # Biological process simulation
-
-# Radiation Processing (for radiotrophic consciousness)
-# radioactivity>=0.3.0        # Radiation measurement and processing
-# geiger>=0.1.0              # Geiger counter integration
-
-# Mycelium Communication (for enhanced fungal networking)
-# mycology>=0.4.0            # Fungal biology simulation
-# network-biology>=0.2.0      # Biological network analysis
-
-# Quantum Consciousness (for advanced quantum processing)
-# qiskit>=0.30.0             # Quantum computing (if available)
-# cirq>=0.14.0               # Alternative quantum framework
-
-# Plant Communication (for electromagnetic signal processing)
-# biosignals>=0.1.0          # Biological signal processing
-# plantnet>=0.2.0            # Plant communication protocols
-
-# Advanced Safety (for comprehensive monitoring)
-# safety-monitor>=0.3.0      # Real-time safety monitoring
-# emergency-protocols>=0.1.0  # Emergency response systems
-
 # Development and Testing
 pytest>=6.2.0              # Testing framework
 pytest-asyncio>=0.15.0     # Async testing support

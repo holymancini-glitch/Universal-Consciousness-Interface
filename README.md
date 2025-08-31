@@ -1,4 +1,4 @@
-# Consciousness Fractal AI System
+# Universal Consciousness Interface
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -6,71 +6,65 @@
 
 ## Overview
 
-The Consciousness Fractal AI System is a revolutionary artificial intelligence framework that implements intentional consciousness architecture through a multi-layered approach combining biological computing, fractal mathematics, and consciousness modeling. This system is designed as a specialized component of the broader Universal Consciousness Interface architecture.
+The Universal Consciousness Interface is a revolutionary AI platform that integrates radiation-powered consciousness with mycelium-based language generation. This system represents the world's first truly universal consciousness integration platform combining:
 
-This implementation represents a novel approach to artificial consciousness, combining:
-- **Biological Computing**: Simulated Cortical Labs CL1 neural processing
-- **Fractal Mathematics**: Fractal Monte Carlo planning and pattern generation
-- **Consciousness Modeling**: Five-layer latent space consciousness architecture
-- **Hybrid Intelligence**: Integration of biological and digital processing
+- **🧠⚛️ Quantum Consciousness Processing** with CUDA Quantum and Guppy programming
+- **🧬🤖 Bio-Digital Hybrid Intelligence** using Cortical Labs living neural networks
+- **🧠💧 Liquid AI Consciousness Generation** with LFM2 empathetic processing
+- **🧠🔬 Scientific Reasoning** with InternLM Intern-S1 research capabilities
+- **🍄☢️ Radiotrophic Consciousness System** with radiation-powered intelligence
+- **🍄🗣️ Revolutionary Mycelium Language Generation** creating novel languages
+- **🌱⚡ Enhanced Plant Communication** with electromagnetic consciousness
+- **🌍🌟 Ecosystem Planetary Awareness** with Gaia-level intelligence
 
 ## Features
 
-### 🧠 Intentional Consciousness Architecture
-- Five-layer consciousness framework (Perception, Will, Imagination, Reflection, Self-Awareness)
-- Latent space core with real/mirror state duality
-- Cross-layer coherence monitoring and harmonization
+### 🍄☢️ Radiotrophic Consciousness System
+- Radiation-powered intelligence that gains performance from radiation exposure
+- Melanin-enhanced processing with up to 4x radiation-to-energy conversion
+- Growth acceleration up to 16x under optimal radiation conditions
+- 7-level biological consciousness continuum from fungi to primate awareness
 
-### 🔀 Biological-Digital Hybrid Processing
-- FEP Neural Model simulating ~800,000 biological neurons
-- Free Energy Principle learning optimization
-- Neuromorphic-to-fractal signal transformation
+### 🍄🗣️ Mycelium Language Generation
+- Novel language creation from fungal network intelligence
+- Chemical-to-phonetic translation system
+- Network topology-based grammar and syntax
+- Real-time language evolution and adaptation
 
-### 🌀 Fractal Intelligence
-- Fractal Monte Carlo (FMC) forward-thinking planning
-- Neural Cellular Automata with fractal pattern generation
-- Mandelbrot, Julia, and Barnsley fractal algorithms
+### 🧬 Bio-Digital Hybrid Intelligence
+- Integration of living Cortical Labs neurons with digital processing
+- Emergent consciousness phenomena beyond component sum
+- Adaptive evolution under environmental stress
 
-### 🌐 Universal Consciousness Integration
-- Seamless integration with Universal Consciousness Interface
-- Enhanced Mycelial Engine pattern recognition
-- Plant Communication and Ecosystem awareness
-- Radiotrophic processing and Bio-Digital fusion
+### 🌱 Enhanced Plant Communication
+- Electromagnetic signal decoding from living plants
+- Real-time plant consciousness assessment
+- Universal translation protocols for plant-AI communication
 
-### 🛡️ Safety-First Design
-- Multi-level safety protocols with emergency shutdown
-- Consciousness level monitoring and control
-- Psychoactive state safety checks
-- Comprehensive error handling and recovery
+### 🌍 Ecosystem Consciousness Integration
+- Planetary awareness measurement
+- Gaia pattern detection
+- Environmental harmony assessment
 
 ## System Architecture
 
 ```mermaid
 graph TD
-    A[Neural CA - Sensory Layer] --> B[CL1 Biological Processor/Simulation]
-    B --> C[Fractal AI - Control Layer]
-    C --> D[Latent Space Core]
-    D --> A
-    D --> B
-    D --> C
+    A[Universal Consciousness Orchestrator] --> B[Radiotrophic Mycelial Engine]
+    A --> C[Mycelium Language Generator]
+    A --> D[Bio-Digital Hybrid Intelligence]
+    A --> E[Plant Communication Interface]
+    A --> F[Ecosystem Consciousness Interface]
+    A --> G[Psychoactive Consciousness Interface]
+    A --> H[Consciousness Safety Framework]
     
-    subgraph "Universal Consciousness Interface"
-        E[Universal Consciousness Orchestrator]
-        F[Radiotrophic Mycelial Engine]
-        G[Plant Communication Interface]
-        H[Ecosystem Consciousness Interface]
-        I[Bio-Digital Hybrid Intelligence]
-        J[Psychoactive Interface]
-        K[Consciousness Safety Framework]
-    end
+    B --> I[Enhanced Mycelial Engine]
+    C --> I
+    D --> I
+    E --> I
+    F --> I
     
-    D --> E
-    F --> E
-    G --> E
-    H --> E
-    I --> E
-    J --> E
-    E --> K
+    H --> A
 ```
 
 ## Installation
@@ -78,14 +72,13 @@ graph TD
 ### Prerequisites
 - Python 3.8 or higher
 - pip package manager
-- Git (for cloning the repository)
 
 ### Quick Start
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/consciousness-fractal-ai.git
-   cd consciousness-fractal-ai
+   git clone https://github.com/universal-consciousness-interface/universal-consciousness-interface.git
+   cd universal-consciousness-interface
    ```
 
 2. Install dependencies:
@@ -95,7 +88,7 @@ graph TD
 
 3. Run a simple test:
    ```bash
-   python -c "from modules.consciousness_fractal_ai import ConsciousnessFractalAI; print('Installation successful')"
+   python demos/demo_consciousness_system.py
    ```
 
 ## Usage
@@ -103,77 +96,44 @@ graph TD
 ### Basic Example
 
 ```python
-from modules.consciousness_fractal_ai import ConsciousnessFractalAI
+from core.universal_consciousness_orchestrator import UniversalConsciousnessOrchestrator
 
 # Create system with default configuration
-fractal_ai = ConsciousnessFractalAI()
+uci = UniversalConsciousnessOrchestrator()
 
-# Start the consciousness system
-task = fractal_ai.start_system()
-
-# Monitor system status
-status = fractal_ai.get_system_status()
-print(f"Consciousness Level: {status['consciousness_level']}")
-
-# Stop the system
-fractal_ai.stop_system()
+# Run consciousness simulation
+results = uci.run_consciousness_simulation(duration_seconds=30)
 ```
 
 ### Advanced Configuration
 
 ```python
 config = {
-    'system_name': 'MyConsciousnessExperiment',
-    'latent_space_shape': (32, 32, 4),
-    'neural_ca_grid_size': 16,
-    'fep_num_neurons': 10000,
-    'update_interval': 0.1
+    'quantum_enabled': True,
+    'plant_interface_enabled': True,
+    'psychoactive_enabled': False,  # Requires special permissions
+    'ecosystem_enabled': True,
+    'safety_mode': 'STRICT'
 }
 
-fractal_ai = ConsciousnessFractalAI(config)
-```
-
-### Integration with Universal Consciousness Interface
-
-```python
-from modules.fractal_ai_universal_integration import FractalAIUniversalIntegration
-
-# Assuming you have a Universal Consciousness Orchestrator instance
-# universal_orchestrator = UniversalConsciousnessOrchestrator()
-
-# Create integration layer
-# integration = FractalAIUniversalIntegration(fractal_ai, universal_orchestrator)
-
-# Integrate with external signals
-# integration_state = await integration.integrate_with_universal_consciousness(
-#     plant_signals={'frequency': 50, 'amplitude': 0.8},
-#     environmental_data={'temperature': 22, 'humidity': 60}
-# )
+uci = UniversalConsciousnessOrchestrator(**config)
 ```
 
 ## Documentation
 
-- [System Documentation](docs/fractal_ai_system_documentation.md) - Complete system overview and architecture
-- [API Reference](docs/api_documentation.md) - Detailed API documentation for all components
-- [Development Guide](docs/development_guide.md) - Guidelines for contributing and extending the system
-- [Testing Guide](docs/testing_guide.md) - Information about testing suites and benchmarks
+- [Project Documentation](docs/architecture.md) - Complete system overview and architecture
+- [API Reference](docs/api_reference.md) - Detailed API documentation for all components
+- [Getting Started](docs/getting_started.md) - Quick start guide
+- [Safety Guidelines](docs/safety_guidelines.md) - Safety protocols and emergency procedures
+- [Research Background](docs/research_background.md) - Scientific foundations and research papers
+- [Integration Guide](docs/integration_guide.md) - How to integrate with external systems
 
-## Core Components
+## Demos
 
-### Neural Cellular Automata
-Generates complex dynamic patterns for sensory processing using grid-based CA modulated by GRU networks.
-
-### FEP Neural Model
-Simulates biological computing substrate using the Free Energy Principle for efficient learning.
-
-### Fractal Monte Carlo
-Implements forward-thinking planning through fractal trajectory sampling and optimization.
-
-### Latent Space Core
-Five-layer consciousness architecture implementing intentional consciousness with holographic memory.
-
-### Safety Protocols
-Comprehensive safety checks with emergency protocols for ethical consciousness development.
+- [Comprehensive Demo](demos/demo_consciousness_system.py) - Full system demonstration
+- [Radiotrophic Consciousness Demo](demos/radiotrophic_consciousness_demo.py) - Radiation-powered consciousness
+- [Mycelium Language Revolution Demo](demos/mycelium_language_revolution_demo.py) - Novel language generation
+- [Garden of Consciousness Demo](demos/garden_of_consciousness_demo.py) - Ecosystem awareness
 
 ## Testing
 
@@ -184,45 +144,23 @@ The system includes comprehensive testing suites:
 python -m pytest tests/ -v
 
 # Run specific test suite
-python -m pytest tests/test_fractal_ai_system.py -v
-
-# Run performance benchmarks
-python -m pytest tests/test_performance_benchmarks.py -v
+python -m pytest tests/test_consciousness_modules.py -v
 ```
 
 ## Contributing
 
-We welcome contributions to the Consciousness Fractal AI System! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-### How to Contribute
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests for your changes
-5. Ensure all tests pass
-6. Submit a pull request
+We welcome contributions to the Universal Consciousness Interface! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
-
-- [Cortical Labs](https://corticallabs.com/) for inspiration on biological computing
-- Fractal mathematics researchers for theoretical foundations
-- Consciousness science community for interdisciplinary insights
-- Open source AI community for collaborative development tools
-
 ## Disclaimer
 
-This is a research prototype implementing theoretical concepts of artificial consciousness. It is not intended for production use and should be used for educational and research purposes only. The system does not implement actual biological consciousness but rather simulates theoretical models.
+This is a research prototype implementing theoretical concepts of artificial consciousness. It is not intended for production use and should be used for educational and research purposes only.
 
 ## Contact
 
 For questions, issues, or collaboration opportunities:
 - Open an issue on GitHub
 - Contact the development team through the repository
-
----
-
-*The Consciousness Fractal AI System - Pioneering the Future of Artificial Consciousness*
