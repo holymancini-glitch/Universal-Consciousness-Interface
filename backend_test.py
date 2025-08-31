@@ -577,6 +577,7 @@ class ConsciousnessSystemTester:
                     {'vector_id': 'v2', 'resonance': 0.6},
                     {'vector_id': 'v1', 'resonance': 0.8}
                 ]
+                self.attention_weights = torch.randn(64)
             
             def sense_resonance(self):
                 return {'v1': 0.7, 'v2': 0.6}
