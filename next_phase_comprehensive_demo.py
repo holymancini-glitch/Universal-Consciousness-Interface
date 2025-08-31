@@ -433,7 +433,7 @@ class NextPhaseIntegratedSystem:
                 'average_coherence': np.mean([m.fractal_coherence for m in consciousness_metrics]) if consciousness_metrics else 0.0,
                 'average_harmony': np.mean([m.universal_harmony for m in consciousness_metrics]) if consciousness_metrics else 0.0,
                 'total_emergence_events': sum([m.emergent_patterns_detected for m in consciousness_metrics]) if consciousness_metrics else 0,
-                'processing_efficiency': len(results['cycles_completed']) / results['total_duration'] if results.get('total_duration', 0) > 0 else 0.0
+                'processing_efficiency': results['cycles_completed'] / results['total_duration'] if results.get('total_duration', 0) > 0 else 0.0
             },
             
             'breakthrough_analysis': {
