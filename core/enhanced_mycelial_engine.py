@@ -246,41 +246,32 @@ class EnhancedMycelialEngine:
     def _update_collective_intelligence(self):
         """Update collective intelligence score"""
         if len(self.nodes) == 0:
-            self.collective_intelligence_score = 0.0
+            self.collective_intelligence_score = 0
             return
         
-        # Network connectivity (normalized per node)
-        connectivity = min(1.0, self.network_graph.number_of_edges() / max(1, len(self.nodes)))
+        # Network connectivity
+        connectivity = self.network_graph.number_of_edges() / max(1, len(self.nodes))
         
         # Cross-consciousness connectivity
         cross_edges = sum(1 for _, _, data in self.network_graph.edges(data=True)
                          if data.get('connection_type') == 'cross_consciousness')
-        cross_connectivity = cross_edges / max(1, self.network_graph.number_of_edges()) if self.network_graph.number_of_edges() > 0 else 0
+        cross_connectivity = cross_edges / max(1, self.network_graph.number_of_edges())
         
         # Pattern diversity
-        pattern_types = set(p['type'] for p in self.pattern_history if isinstance(p, dict) and 'type' in p)
+        pattern_types = set(p['type'] for p in self.pattern_history)
         pattern_diversity = min(1.0, len(pattern_types) / 5.0)
         
-        # Combined intelligence score (ensure between 0 and 1)
-        self.collective_intelligence_score = min(1.0, max(0.0,
-            connectivity * 0.4 + 
-            cross_connectivity * 0.4 + 
-            pattern_diversity * 0.2
-        ))
+        # Combined intelligence score
+        self.collective_intelligence_score = (connectivity * 0.4 + 
+                                            cross_connectivity * 0.4 + 
+                                            pattern_diversity * 0.2)
     
     def measure_network_connectivity(self) -> float:
         """Measure network connectivity"""
-        if len(self.nodes) <= 1:
-            return 0.0
+        if len(self.nodes) == 0:
+            return 0
         
-        # Calculate edge density (should be between 0 and 1)
-        max_possible_edges = len(self.nodes) * (len(self.nodes) - 1) / 2
-        current_edges = self.network_graph.number_of_edges()
-        
-        # Edge density normalized between 0 and 1
-        edge_density = current_edges / max_possible_edges if max_possible_edges > 0 else 0.0
-        edge_density = min(1.0, max(0.0, edge_density))  # Ensure between 0 and 1
-        
+        edge_density = (2 * self.network_graph.number_of_edges()) / (len(self.nodes) * (len(self.nodes) - 1))
         self.network_coherence = edge_density
         return edge_density
     

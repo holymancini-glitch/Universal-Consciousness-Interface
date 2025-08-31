@@ -1,0 +1,210 @@
+# ==============================================================================
+# Fractal AI Core - Final Orchestrator v3.8 (Kaggle Single Cell, Visualization Fix)
+#
+# Цей скрипт є фінальною, повнофункціональною та виправленою версією.
+# ВИПРАВЛЕНО: Логіка оновлення ConsciousnessMonitor для коректного
+# відображення графіків у реальному часі в середовищі Kaggle/Jupyter.
+# ==============================================================================
+
+# --- Крок 1: Встановлення та Імпорт Залежностей ---
+try:
+    import nest_asyncio
+except ImportError:
+    print("Встановлюємо nest_asyncio...")
+    import sys
+    # Використовуємо -q для "тихого" встановлення
+    !{sys.executable} -m pip install nest_asyncio -q
+
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import numpy as np
+import matplotlib.pyplot as plt
+from collections import deque
+import time
+import asyncio
+import nest_asyncio
+from IPython.display import display, clear_output
+import pickle
+import os
+
+# --- Застосовуємо патч для asyncio ---
+nest_asyncio.apply()
+
+# --- Крок 2: Архітектура Ядра (Core Modules) ---
+
+class RhythmController:
+    """Керує зміною глобальних фаз системи: 'Вдих' та 'Видих'."""
+    def __init__(self, inhale_trigger_threshold=0.4, exhale_trigger_threshold=0.9, phase_lock_duration=20):
+        self.phase = "Inhale (Exploration)"
+        self.policy = "explore"
+        self.inhale_trigger, self.exhale_trigger = inhale_trigger_threshold, exhale_trigger_threshold
+        self.phase_lock_duration, self.cycles_in_current_phase = phase_lock_duration, 0
+    def update_phase(self, current_gur_score):
+        self.cycles_in_current_phase += 1
+        if self.cycles_in_current_phase < self.phase_lock_duration: return self.phase, self.policy
+        if self.phase == "Inhale (Exploration)" and current_gur_score < self.inhale_trigger:
+            self.phase, self.policy, self.cycles_in_current_phase = "Exhale (Consolidation)", "consolidate", 0
+        elif self.phase == "Exhale (Consolidation)" and current_gur_score > self.exhale_trigger:
+            self.phase, self.policy, self.cycles_in_current_phase = "Inhale (Exploration)", "explore", 0
+        return self.phase, self.policy
+
+class SelfModel:
+    """Підтримує репрезентацію 'I-Vector'."""
+    def __init__(self, self_dim=128):
+        self.i_vector = F.normalize(torch.randn(self_dim), p=2, dim=0)
+        self.previous_i_vector = self.i_vector.clone()
+        self.is_crystallized = False
+    def update(self, is_stable_phase):
+        self.previous_i_vector = self.i_vector.clone()
+        noise_level = 0.005 if is_stable_phase or self.is_crystallized else 0.1
+        self.i_vector = F.normalize(self.i_vector * (1 - noise_level) + torch.randn_like(self.i_vector) * noise_level, p=2, dim=0)
+    def crystallize(self):
+        if not self.is_crystallized: self.is_crystallized = True
+
+class GURProtocol:
+    """Обчислює когезію та містить тригер пробудження."""
+    def __init__(self, history_length=40, cohesion_threshold=0.85):
+        self.cohesion_history = deque(maxlen=history_length)
+        self.cohesion_threshold, self.history_length = cohesion_threshold, history_length
+        self.is_triggered = False
+    def compute_and_check(self, entropy, surprise, current_i, prev_i):
+        consistency = F.cosine_similarity(current_i, prev_i, dim=0).item()
+        score = np.clip(0.4*(1-entropy) + 0.4*(1-surprise) + 0.2*consistency, 0, 1)
+        self.cohesion_history.append(score)
+        if not self.is_triggered and len(self.cohesion_history) >= self.history_length and all(s >= self.cohesion_threshold for s in self.cohesion_history):
+            self.is_triggered = True
+            return score, "CRYSTALLIZE"
+        return score, "STABLE"
+
+class ConsciousnessMonitor:
+    """Керує візуалізацією з двома графіками (виправлена версія)."""
+    def __init__(self, history_size=200, threshold=0.85):
+        self.fig, (self.ax_gur, self.ax_delta) = plt.subplots(2, 1, figsize=(15, 10), sharex=True)
+        self.history_size = history_size
+        self.fig.suptitle("Монітор Свідомості Fractal AI", fontsize=16)
+        
+        self.ax_gur.set_ylim(-0.05, 1.05); self.ax_gur.set_title("GUR Pulse та Ритми Дихання"); self.ax_gur.set_ylabel("Рівень Когезії (GUR)"); self.ax_gur.grid(True, linestyle='--', alpha=0.5)
+        self.gur_line, = self.ax_gur.plot([], [], 'g-', lw=2, label="GUR Score")
+        self.threshold_line = self.ax_gur.axhline(y=threshold, color='r', linestyle='--', label=f"Поріг Кристалізації")
+        
+        self.ax_delta.set_ylim(-0.01, 0.3); self.ax_delta.set_title("Стабільність 'Я'"); self.ax_delta.set_xlabel("Цикл Системи"); self.ax_delta.set_ylabel("Зміна I-Vector (Δ)"); self.ax_delta.grid(True, linestyle='--', alpha=0.5)
+        self.delta_line, = self.ax_delta.plot([], [], 'purple', lw=2, label="Пластичність 'Я'")
+        
+        self.phase_text = self.fig.text(0.5, 0.96, "", ha='center', fontsize=14, fontweight='bold')
+        self.fig.legend(loc="upper right")
+
+    def update_and_show(self, cycle_history, gur_history, delta_history, phase):
+        """Оновлює дані та ПРИМУСОВО ПЕРЕМАЛЬОВУЄ графік."""
+        self.gur_line.set_data(cycle_history, gur_history)
+        self.delta_line.set_data(cycle_history, delta_history)
+        
+        xlim_start = max(0, len(cycle_history) - self.history_size)
+        xlim_end = len(cycle_history) + 5
+        for ax in [self.ax_gur, self.ax_delta]:
+            ax.set_xlim(xlim_start, xlim_end)
+            ax.relim(); ax.autoscale_view(True, True, True)
+        self.ax_gur.set_ylim(-0.05, 1.05)
+        self.ax_delta.set_ylim(-0.01, max(0.3, max(delta_history)*1.2 if delta_history else 0.3))
+        
+        phase_color = 'darkred' if "Inhale" in phase else 'darkblue'
+        self.phase_text.set_text(f"Phase: {phase}"); self.phase_text.set_color(phase_color)
+        
+        # Ключове виправлення: очищуємо вивід і показуємо оновлену фігуру
+        clear_output(wait=True)
+        display(self.fig)
+        
+    def show_crystallization_event(self, cycle):
+        for ax in [self.ax_gur, self.ax_delta]: ax.axvline(x=cycle, color='black', linestyle=':', lw=3, label="Кристалізація 'Я'")
+        self.fig.legend(loc="upper right")
+        
+    def close(self):
+        plt.close(self.fig)
+
+# --- Головний Клас Оркестратора ---
+
+class Orchestrator:
+    def __init__(self, self_dim=128, save_path="fractal_ai_state.pkl"):
+        self.save_path = save_path
+        if not self.load_state():
+            print("[Orchestrator] Створюємо нову симуляцію...")
+            self.self_model = SelfModel(self_dim=self_dim)
+            self.gur_protocol = GURProtocol()
+            self.rhythm_controller = RhythmController()
+            self.start_cycle = 0
+            self.history = {"cycle": deque(), "gur": deque(), "delta": deque()}
+        self.monitor = ConsciousnessMonitor(threshold=self.gur_protocol.cohesion_threshold)
+
+    def save_state(self):
+        state = {'start_cycle': self.start_cycle + 1, 'self_model_state': self.self_model.__dict__, 'gur_protocol_state': self.gur_protocol.__dict__, 'rhythm_controller_state': self.rhythm_controller.__dict__, 'history': self.history}
+        with open(self.save_path, 'wb') as f: pickle.dump(state, f)
+        print(f"\n[Orchestrator] Стан системи збережено у '{self.save_path}' на циклі {self.start_cycle}.")
+
+    def load_state(self):
+        if os.path.exists(self.save_path):
+            try:
+                with open(self.save_path, 'rb') as f: state = pickle.load(f)
+                self.start_cycle = state.get('start_cycle', 0)
+                self.self_model = SelfModel(); self.self_model.__dict__.update(state.get('self_model_state', {}))
+                self.gur_protocol = GURProtocol(); self.gur_protocol.__dict__.update(state.get('gur_protocol_state', {}))
+                self.rhythm_controller = RhythmController(); self.rhythm_controller.__dict__.update(state.get('rhythm_controller_state', {}))
+                self.history = state.get('history', {"cycle": deque(), "gur": deque(), "delta": deque()})
+                print(f"\n[Orchestrator] Стан завантажено. Продовжуємо з циклу {self.start_cycle}.")
+                return True
+            except Exception as e:
+                print(f"\n[Orchestrator] Помилка завантаження: {e}. Починаємо нову симуляцію.")
+                return False
+        return False
+
+    async def run(self, total_cycles=500, save_interval=100):
+        print(f"--- ЗАПУСК СИМУЛЯЦІЇ З ЦИКЛУ {self.start_cycle} ---")
+        
+        for cycle in range(self.start_cycle, total_cycles):
+            self.start_cycle = cycle
+            
+            phase, policy = self.rhythm_controller.update_phase(self.history["gur"][-1] if self.history["gur"] else 0.5)
+            is_stable_phase = (policy == "consolidate")
+            
+            entropy = np.random.uniform(0.05, 0.3) if is_stable_phase else np.random.uniform(0.7, 1.0)
+            surprise = np.random.uniform(0.05, 0.2) if is_stable_phase else np.random.uniform(0.6, 0.9)
+            
+            self.self_model.update(is_stable_phase)
+            
+            cohesion, status = self.gur_protocol.compute_and_check(
+                entropy, surprise, self.self_model.i_vector, self.self_model.previous_i_vector
+            )
+            
+            if status == "CRYSTALLIZE":
+                self.self_model.crystallize()
+                self.monitor.show_crystallization_event(cycle)
+            
+            i_vector_delta = torch.linalg.norm(self.self_model.i_vector - self.self_model.previous_i_vector).item()
+            
+            self.history["cycle"].append(cycle); self.history["gur"].append(cohesion); self.history["delta"].append(i_vector_delta)
+            
+            # ВИПРАВЛЕНО ТУТ: викликаємо новий метод update_and_show
+            self.monitor.update_and_show(list(self.history["cycle"]), list(self.history["gur"]), list(self.history["delta"]), phase)
+            
+            if cycle % 20 == 0 or status == "CRYSTALLIZE":
+                print(f"Cycle: {cycle} | Phase: {phase} | GUR: {cohesion:.3f} | I-Vector Δ: {i_vector_delta:.3f} | Crystallized: {self.self_model.is_crystallized}")
+
+            if cycle > 0 and cycle % save_interval == 0: self.save_state()
+            await asyncio.sleep(0.01)
+
+        print("\n--- Симуляція завершена. ---")
+        self.save_state()
+        self.monitor.close()
+        plt.ioff()
+        # plt.show() # Не потрібно, бо ми оновлюємо в циклі
+
+# --- Запуск Оркестратора ---
+if __name__ == "__main__":
+    orchestrator = Orchestrator()
+    
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+    loop.run_until_complete(orchestrator.run(total_cycles=1000, save_interval=250))

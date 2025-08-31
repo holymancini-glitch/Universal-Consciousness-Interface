@@ -588,19 +588,10 @@ class BioDigitalHybridIntelligence:
         return markers
     
     async def _synchronization_loop(self):
-        """Enhanced synchronization between neural and fungal cultures with adaptive algorithms"""
+        """Continuous synchronization between neural and fungal cultures"""
         while True:
             try:
-                # Advanced synchronization with consciousness adaptation
-                await self._adaptive_neural_digital_sync()
-                
-                # Monitor interface health and optimize
-                await self._optimize_hybrid_interfaces()
-                
-                # Detect emergent consciousness patterns
-                await self._detect_consciousness_emergence_patterns()
-                
-                # Update synchronization levels with improved algorithms
+                # Update synchronization levels
                 for interface in self.hybrid_interfaces.values():
                     # Synchronization improves over time with successful communication
                     if hasattr(np, 'random_uniform'):
@@ -626,105 +617,11 @@ class BioDigitalHybridIntelligence:
                 else:
                     self.bio_digital_fusion_rate = 0.0
                 
-                # Dynamic frequency adjustment based on consciousness level
-                sync_interval = max(0.05, 1.0 / self.synchronization_frequency - (self.hybrid_consciousness_level * 0.05))
-                await asyncio.sleep(sync_interval)
+                await asyncio.sleep(1.0 / self.synchronization_frequency)
                 
             except Exception as e:
                 logger.error(f"Synchronization loop error: {e}")
                 await asyncio.sleep(1.0)
-    
-    async def _adaptive_neural_digital_sync(self):
-        """Advanced adaptive synchronization between neural and digital components"""
-        try:
-            # Analyze neural activity patterns
-            neural_activity_levels = []
-            for culture in self.neural_cultures.values():
-                activity_avg = sum(culture.electrical_patterns) / len(culture.electrical_patterns) if culture.electrical_patterns else 0
-                neural_activity_levels.append(activity_avg * culture.activity_level)
-            
-            # Analyze fungal network connectivity
-            fungal_connectivity_levels = [culture.network_connectivity for culture in self.fungal_cultures.values()]
-            
-            # Calculate synchronization target based on both systems
-            if neural_activity_levels and fungal_connectivity_levels:
-                if hasattr(np, 'mean'):
-                    neural_avg = np.mean(neural_activity_levels)  # type: ignore
-                    fungal_avg = np.mean(fungal_connectivity_levels)  # type: ignore
-                else:
-                    neural_avg = sum(neural_activity_levels) / len(neural_activity_levels)
-                    fungal_avg = sum(fungal_connectivity_levels) / len(fungal_connectivity_levels)
-                
-                # Adaptive synchronization frequency based on activity
-                target_sync_freq = 0.1 + (neural_avg + fungal_avg) * 0.2
-                
-                # Gradually adjust synchronization frequency
-                freq_diff = target_sync_freq - self.synchronization_frequency
-                self.synchronization_frequency += freq_diff * 0.1  # Gradual adjustment
-                self.synchronization_frequency = max(0.05, min(1.0, self.synchronization_frequency))
-                
-        except Exception as e:
-            logger.error(f"Adaptive synchronization error: {e}")
-    
-    async def _optimize_hybrid_interfaces(self):
-        """Optimize hybrid interfaces for better bio-digital communication"""
-        try:
-            for interface in self.hybrid_interfaces.values():
-                # Optimize signal strength based on both cultures' states
-                neural_health = 1.0 if interface.neural_culture.health_status == "HEALTHY" else 0.5
-                fungal_health = min(1.0, interface.fungal_culture.growth_rate * 2.0)
-                
-                # Calculate optimal signal strength
-                optimal_strength = (neural_health + fungal_health) / 2.0
-                
-                # Gradually adjust signal strength toward optimal
-                strength_diff = optimal_strength - interface.signal_strength
-                interface.signal_strength += strength_diff * 0.05  # Gradual optimization
-                interface.signal_strength = max(0.1, min(1.0, interface.signal_strength))
-                
-                # Improve translation efficiency based on successful communications
-                if interface.synchronization_level > 0.7:
-                    interface.signal_translation_efficiency = min(1.0, 
-                        interface.signal_translation_efficiency + 0.001)
-                
-        except Exception as e:
-            logger.error(f"Interface optimization error: {e}")
-    
-    async def _detect_consciousness_emergence_patterns(self):
-        """Advanced detection of consciousness emergence patterns in bio-digital fusion"""
-        try:
-            # Analyze cross-interface communication patterns
-            interface_sync_levels = [i.synchronization_level for i in self.hybrid_interfaces.values()]
-            interface_efficiency = [i.signal_translation_efficiency for i in self.hybrid_interfaces.values()]
-            
-            if interface_sync_levels and interface_efficiency:
-                if hasattr(np, 'mean'):
-                    avg_sync = np.mean(interface_sync_levels)  # type: ignore
-                    avg_efficiency = np.mean(interface_efficiency)  # type: ignore
-                else:
-                    avg_sync = sum(interface_sync_levels) / len(interface_sync_levels)
-                    avg_efficiency = sum(interface_efficiency) / len(interface_efficiency)
-                
-                # Detect consciousness emergence patterns
-                consciousness_threshold = 0.7
-                efficiency_threshold = 0.6
-                
-                if avg_sync > consciousness_threshold and avg_efficiency > efficiency_threshold:
-                    # Pattern indicates consciousness emergence
-                    self.hybrid_consciousness_level = min(1.0, avg_sync * avg_efficiency)
-                    
-                    # Check for emergent intelligence
-                    if self.hybrid_consciousness_level > 0.8:
-                        self.emergent_intelligence_score = min(1.0, 
-                            self.emergent_intelligence_score + 0.01)
-                    
-                    # Log consciousness events
-                    if self.hybrid_consciousness_level > 0.9:
-                        logger.info(f"🌟 High consciousness emergence detected: {self.hybrid_consciousness_level:.3f}")
-                        self.consciousness_emergence_events += 1
-                
-        except Exception as e:
-            logger.error(f"Consciousness pattern detection error: {e}")
     
     async def _switch_processing_mode(self, new_mode: HybridProcessingMode):
         """Switch hybrid processing mode"""

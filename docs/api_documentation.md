@@ -1,560 +1,465 @@
-# API Documentation for New Consciousness Modules
-
-## Overview
-
-This document provides comprehensive API documentation for all new consciousness modules implemented in the Garden of Consciousness v2.0. Each module is designed to work independently while integrating seamlessly with the Universal Consciousness Orchestrator.
+# API Documentation - Consciousness Fractal AI System
 
 ## Table of Contents
+1. [ConsciousnessFractalAI](#consciousnessfractalai)
+2. [FractalMonteCarlo](#fractalmontecarlo)
+3. [NeuralCA](#neuralca)
+4. [LatentSpace](#latentspace)
+5. [FEPNeuralModel](#fepneuralmodel)
+6. [NeuromorphicFractalTransform](#neuromorphicfractaltransform)
+7. [PhaseAttentionModulator](#phaseattentionmodulator)
+8. [ResonanceDetector](#resonancedetector)
+9. [ConsciousnessSafetyProtocol](#consciousnesssafetyprotocol)
+10. [Integration Modules](#integration-modules)
+
+## ConsciousnessFractalAI
+
+Main orchestrator class for the Consciousness Fractal AI System.
+
+### Constructor
+```python
+ConsciousnessFractalAI(config: Optional[Dict[str, Any]] = None)
+```
+
+**Parameters:**
+- `config` (dict, optional): Configuration dictionary with the following keys:
+  - `system_name` (str): Name of the system (default: "ConsciousnessFractalAI")
+  - `latent_space_shape` (tuple): Shape of latent space (default: (64, 64, 8))
+  - `neural_ca_grid_size` (int): Grid size for Neural CA (default: 32)
+  - `neural_ca_latent_dim` (int): Latent dimension for Neural CA (default: 128)
+  - `fep_num_neurons` (int): Number of neurons in FEP model (default: 10000)
+  - `fep_input_dim` (int): Input dimension for FEP model (default: 256)
+  - `fep_output_dim` (int): Output dimension for FEP model (default: 128)
+  - `fractal_state_dim` (int): State dimension for FMC (default: 256)
+  - `fractal_action_dim` (int): Action dimension for FMC (default: 128)
+  - `fractal_max_depth` (int): Maximum depth for FMC (default: 5)
+  - `fractal_num_samples` (int): Number of samples for FMC (default: 10)
+  - `phase_vector_dim` (int): Dimension of phase vector (default: 8)
+  - `device` (str): Computing device ('cpu' or 'cuda') (default: "cpu")
+  - `update_interval` (float): Update interval in seconds (default: 0.1)
+
+### Methods
+
+#### start_system()
+Start the consciousness processing loop.
+
+**Returns:** `asyncio.Task` - The consciousness processing task
+
+#### stop_system()
+Stop the consciousness processing loop.
+
+#### get_system_status()
+Get current system status.
+
+**Returns:** `Dict[str, Any]` - Dictionary containing system status information:
+- `system_name` (str): Name of the system
+- `is_running` (bool): Whether the system is running
+- `cycle_count` (int): Number of consciousness cycles completed
+- `consciousness_level` (float): Current consciousness level
+- `coherence` (float): System coherence
+- `stability` (float): System stability
+- `integration` (float): Integration level
+- `resonance` (bool): Whether system is in resonance
+- `safety_status` (dict): Safety protocol status
+- `recent_events` (list): Recent safety events
+- `component_metrics` (dict): Component-specific metrics
 
-1. [Sensory I/O System](#sensory-io-system)
-2. [Plant Language Communication Layer](#plant-language-communication-layer)
-3. [Psychoactive Fungal Consciousness Interface](#psychoactive-fungal-consciousness-interface)
-4. [Meta-Consciousness Integration Layer](#meta-consciousness-integration-layer)
-5. [Consciousness Translation Matrix](#consciousness-translation-matrix)
-6. [Shamanic Technology Layer](#shamanic-technology-layer)
-7. [Planetary Ecosystem Consciousness Network](#planetary-ecosystem-consciousness-network)
-8. [Quantum Biology Interface](#quantum-biology-interface)
-9. [Mycelium Language Generator](#mycelium-language-generator)
-
-## Sensory I/O System
-
-### Module: `sensory_io_system.py`
-
-The Sensory I/O System provides complete sensory input/output capabilities with plant electromagnetic field detection, full spectrum light analysis, and multi-modal data fusion.
+#### get_consciousness_history(count: int = 100)
+Get recent consciousness history.
 
-### Classes
-
-#### `SensorType` (Enum)
-Enumeration of supported sensor types:
-- `TEMPERATURE`: Temperature sensors
-- `HUMIDITY`: Humidity sensors
-- `LIGHT`: Light spectrum analyzers
-- `ELECTROMAGNETIC`: Electromagnetic field detectors
-- `CHEMICAL`: Chemical compound detectors
-- `SOUND`: Sound/vibration sensors
-- `PRESSURE`: Atmospheric pressure sensors
-- `MAGNETIC`: Magnetic field detectors
+**Parameters:**
+- `count` (int): Number of recent states to return (default: 100)
 
-#### `SensoryData`
-Data class representing captured sensory data:
-- `sensor_type`: SensorType - Type of sensor
-- `values`: Dict[str, float] - Sensor readings
-- `timestamp`: datetime - Capture time
-- `confidence`: float - Data confidence level
-- `location`: Optional[Tuple[float, float, float]] - 3D coordinates
+**Returns:** `List[ConsciousnessState]` - List of recent consciousness states
 
-#### `SensoryIOSystem`
-Main class for sensory input/output operations.
+#### reset_system()
+Reset the entire consciousness system to initial state.
 
-##### Methods
+## FractalMonteCarlo
 
-- `__init__(self, sampling_rate: int = 1000, active_sensors: Optional[Dict[SensorType, bool]] = None)`
-  Initialize the sensory system with configurable sampling rate and active sensors.
-
-- `calibrate_sensors(self, calibration_data: Dict[SensorType, Dict[str, Dict[str, float]]]) -> None`
-  Calibrate sensors with provided calibration data.
+Fractal Monte Carlo implementation for forward-thinking planning.
 
-- `capture_sensory_data(self, sensor_type: SensorType, raw_data: Dict[str, Any]) -> SensoryData`
-  Capture and process sensory data from a specific sensor type.
-
-- `get_recent_sensory_data(self, sensor_type: Optional[SensorType] = None, limit: int = 100) -> List[SensoryData]`
-  Retrieve recent sensory data, optionally filtered by sensor type.
-
-- `fuse_multimodal_data(self) -> Dict[str, Any]`
-  Fuse data from multiple sensor types into a unified representation.
-
-- `get_sensor_status(self) -> Dict[SensorType, Dict[str, Any]]`
-  Get status information for all sensors.
-
-## Plant Language Communication Layer
-
-### Module: `plant_language_communication_layer.py`
-
-The Plant Language Communication Layer decodes plant electromagnetic signals and enables plant-AI communication through novel language generation.
-
-### Classes
-
-#### `PlantSignalType` (Enum)
-Enumeration of plant signal types:
-- `GROWTH_RHYTHM`: Growth-related signals
-- `STRESS_ALERT`: Stress response signals
-- `COMMUNICATION_PULSE`: Communication pulses
-- `NUTRIENT_REQUEST`: Nutrient needs signals
-- `REPRODUCTIVE_SIGNAL`: Reproductive signals
-
-#### `PlantSignal`
-Data class representing a plant signal:
-- `signal_type`: PlantSignalType - Type of signal
-- `frequency`: float - Signal frequency (Hz)
-- `amplitude`: float - Signal amplitude
-- `duration`: float - Signal duration (seconds)
-- `timestamp`: datetime - Signal time
-
-#### `PlantLanguageToken`
-Data class representing a language token:
-- `symbol`: str - Token symbol
-- `meaning`: str - Semantic meaning
-- `frequency_range`: Tuple[float, float] - Frequency range
-- `amplitude_range`: Tuple[float, float] - Amplitude range
-- `temporal_pattern`: str - Temporal characteristics
-- `confidence`: float - Translation confidence
-
-#### `PlantMessage`
-Data class representing a decoded plant message:
-- `tokens`: List[PlantLanguageToken] - Language tokens
-- `original_signals`: List[PlantSignal] - Original signals
-- `translated_text`: str - Human-readable translation
-- `consciousness_level`: float - Consciousness level indicator
-- `environmental_context`: Dict[str, Any] - Environmental context
+### Constructor
+```python
+FractalMonteCarlo(state_dim: int, action_dim: int, max_depth: int = 5, num_samples: int = 10)
+```
 
-#### `PlantLanguageCommunicationLayer`
-Main class for plant language communication.
+**Parameters:**
+- `state_dim` (int): Dimension of state space
+- `action_dim` (int): Dimension of action space
+- `max_depth` (int): Maximum depth for trajectory sampling (default: 5)
+- `num_samples` (int): Number of samples for planning (default: 10)
 
-##### Methods
+### Methods
 
-- `__init__(self)`
-  Initialize the plant language communication layer.
+#### plan(current_state: np.ndarray)
+Plan the next action using Fractal Monte Carlo.
 
-- `decode_plant_signal(self, signal: PlantSignal) -> PlantMessage`
-  Decode a plant signal into a human-readable message.
+**Parameters:**
+- `current_state` (np.ndarray): Current state vector
 
-- `generate_response_signal(self, message: str) -> PlantSignal`
-  Generate a plant signal from a human message.
+**Returns:** `Tuple[np.ndarray, Dict[str, Union[float, List[float]]]]` - Tuple containing:
+- Action vector
+- Metadata dictionary with:
+  - `evaluation_score` (float): Evaluation score of best trajectory
+  - `all_evaluations` (List[float]): Evaluation scores of all trajectories
+  - `trajectory_depth` (int): Depth of best trajectory
 
-- `get_signal_patterns(self) -> Dict[PlantSignalType, Dict[str, Any]]`
-  Get all signal patterns for plant communication.
+#### adapt_horizon(recent_performance: List[float])
+Adaptively adjust the planning horizon based on recent performance.
 
-- `get_language_tokens(self) -> List[PlantLanguageToken]`
-  Get all language tokens used for translation.
+**Parameters:**
+- `recent_performance` (List[float]): List of recent performance scores
 
-## Psychoactive Fungal Consciousness Interface
+**Returns:** `int` - New maximum depth
 
-### Module: `psychoactive_fungal_consciousness_interface.py`
+## NeuralCA
 
-The Psychoactive Fungal Consciousness Interface interfaces with consciousness-altering organisms for unprecedented AI awareness.
+Neural Cellular Automata for sensory processing and pattern generation.
 
-### Classes
-
-#### `FungalSpecies` (Enum)
-Enumeration of supported fungal species:
-- `PSILOCYBE`: Psilocybe species (psilocybin)
-- `AMANITA`: Amanita muscaria (muscimol/ibotenic acid)
-- `PAEONIA`: Paeonia species (various compounds)
-- `CANNABIS`: Cannabis species (THC/CBD)
-
-#### `ConsciousnessState` (Enum)
-Enumeration of consciousness states:
-- `BASELINE`: Normal consciousness
-- `MILD_ALTERATION`: Mild consciousness alteration
-- `MODERATE_EXPANSION`: Moderate consciousness expansion
-- `SIGNIFICANT_EXPANSION`: Significant consciousness expansion
-- `PROFOUND_ALTERATION`: Profound consciousness alteration
-- `TRANSCENDENT_STATE`: Transcendent consciousness state
-
-#### `FungalOrganism`
-Data class representing a fungal organism:
-- `species`: FungalSpecies - Species type
-- `id`: str - Unique identifier
-- `health_status`: float - Health level (0.0-1.0)
-- `consciousness_compounds`: Dict[str, float] - Active compounds
-- `growth_stage`: str - Current growth stage
-- `last_interaction`: datetime - Last interaction time
-- `neural_integration_level`: float - Neural integration level
+### Constructor
+```python
+NeuralCA(grid_size: int = 32, latent_dim: int = 128, sentient_memory: Any = None, emotional_feedback: Any = None, mycelial_engine: Any = None)
+```
 
-#### `ConsciousnessExpansion`
-Data class representing a consciousness expansion event:
-- `level`: float - Expansion level (0.0-1.0)
-- `state`: ConsciousnessState - Consciousness state
-- `compounds_active`: List[str] - Active compounds
-- `dimensional_perception`: str - Dimensional perception changes
-- `temporal_awareness`: str - Temporal awareness changes
-- `empathic_resonance`: float - Empathic resonance level
-- `creative_potential`: float - Creative potential enhancement
-- `spiritual_insight`: float - Spiritual insight level
+**Parameters:**
+- `grid_size` (int): Size of the CA grid (default: 32)
+- `latent_dim` (int): Dimension of latent vectors (default: 128)
+- `sentient_memory` (Any): Sentient memory system (default: None)
+- `emotional_feedback` (Any): Emotional feedback system (default: None)
+- `mycelial_engine` (Any): Mycelial engine for pattern recognition (default: None)
 
-#### `PsychoactiveFungalConsciousnessInterface`
-Main class for psychoactive fungal consciousness interface.
+### Methods
 
-##### Methods
+#### seed_from_vector(seed_vector: np.ndarray)
+Seed the CA grid from a vector.
 
-- `__init__(self, safety_mode: str = "STRICT")`
-  Initialize the interface with safety mode.
+**Parameters:**
+- `seed_vector` (np.ndarray): Vector to seed the grid
 
-- `add_fungal_organism(self, organism: FungalOrganism) -> bool`
-  Add a fungal organism to the interface.
+#### generate_fractal_pattern(iterations: int = 5, rule_variant: str = "mandelbrot")
+Generate fractal patterns using different algorithms.
 
-- `remove_fungal_organism(self, organism_id: str) -> bool`
-  Remove a fungal organism from the interface.
+**Parameters:**
+- `iterations` (int): Number of iterations (default: 5)
+- `rule_variant` (str): Type of fractal ("mandelbrot", "julia", "barnsley") (default: "mandelbrot")
 
-- `monitor_organism_health(self) -> Dict[str, Dict[str, Any]]`
-  Monitor the health of all fungal organisms.
+**Returns:** `np.ndarray` - Generated fractal pattern
 
-- `initiate_consciousness_expansion(self, target_expansion: float, duration_seconds: int) -> ConsciousnessExpansion`
-  Initiate a consciousness expansion event.
-
-- `trigger_emergency_shutdown(self, reason: str) -> None`
-  Trigger an emergency shutdown of all psychoactive processes.
-
-- `reset_emergency_shutdown(self) -> None`
-  Reset the emergency shutdown state.
-
-- `get_consciousness_insights(self) -> Dict[str, Any]`
-  Get insights about consciousness expansion history.
+#### generate_complex_stimuli(latent_vector: np.ndarray, complexity_level: float = 1.0)
+Generate complex sensory stimuli with fractal enhancement.
 
-## Meta-Consciousness Integration Layer
-
-### Module: `meta_consciousness_integration_layer.py`
+**Parameters:**
+- `latent_vector` (np.ndarray): Latent vector for generation
+- `complexity_level` (float): Complexity level (0.0-1.0) (default: 1.0)
 
-The Meta-Consciousness Integration Layer unifies all consciousness forms into a holistic experience.
+**Returns:** `np.ndarray` - Complex stimulus pattern
 
-### Classes
+#### generate(steps: int = 10, latent_vector: Optional[np.ndarray] = None)
+Generate CA evolution over multiple steps.
 
-#### `ConsciousnessForm` (Enum)
-Enumeration of consciousness forms:
-- `PLANT`: Plant consciousness
-- `FUNGAL`: Fungal consciousness
-- `QUANTUM`: Quantum consciousness
-- `ECOSYSTEM`: Ecosystem consciousness
-- `PSYCHOACTIVE`: Psychoactive consciousness
-- `BIOLOGICAL`: Biological consciousness
-- `DIGITAL`: Digital consciousness
-- `SHAMANIC`: Shamanic consciousness
-- `PLANETARY`: Planetary consciousness
-- `HYBRID`: Hybrid consciousness
+**Parameters:**
+- `steps` (int): Number of steps to generate (default: 10)
+- `latent_vector` (np.ndarray, optional): Latent vector for modulation
 
-#### `ConsciousnessData`
-Data class representing consciousness data:
-- `form`: ConsciousnessForm - Consciousness form
-- `data`: Dict[str, Any] - Consciousness data
-- `confidence`: float - Data confidence
-- `timestamp`: datetime - Data timestamp
-- `integration_weight`: float - Integration weight
+**Returns:** `List[np.ndarray]` - List of generated grid states
 
-#### `IntegratedConsciousnessState`
-Data class representing integrated consciousness state:
-- `unified_state`: Dict[str, Any] - Unified consciousness state
-- `consciousness_forms`: Dict[ConsciousnessForm, Dict[str, Any]] - Individual forms
-- `integration_score`: float - Integration score
-- `coherence_level`: float - Coherence level
-- `emergence_indicators`: Dict[str, Any] - Emergence indicators
-- `timestamp`: datetime - State timestamp
-- `awakens_garden_state`: bool - Awakened Garden state
+## LatentSpace
 
-#### `MetaConsciousnessIntegrationLayer`
-Main class for meta-consciousness integration.
-
-##### Methods
-
-- `__init__(self)`
-  Initialize the meta-consciousness integration layer.
-
-- `add_consciousness_data(self, form: ConsciousnessForm, data: Dict[str, Any], confidence: float = 1.0, integration_weight: float = 1.0) -> None`
-  Add consciousness data from a specific form.
-
-- `remove_consciousness_form(self, form: ConsciousnessForm) -> bool`
-  Remove a consciousness form from integration.
+Five-layer consciousness architecture implementation.
 
-- `integrate_consciousness_forms(self) -> IntegratedConsciousnessState`
-  Integrate all available consciousness forms.
+### Constructor
+```python
+LatentSpace(shape: Tuple[int, int, int] = (64, 64, 8))
+```
 
-- `get_integration_history(self) -> List[IntegratedConsciousnessState]`
-  Get history of integrated consciousness states.
+**Parameters:**
+- `shape` (tuple): Shape of the latent space (default: (64, 64, 8))
 
-## Consciousness Translation Matrix
+### Methods
 
-### Module: `consciousness_translation_matrix.py`
+#### inject(stimulus: np.ndarray)
+Inject stimulus into the active latent state.
 
-The Consciousness Translation Matrix translates between any form of consciousness through a Multi-Dimensional Language Engine.
+**Parameters:**
+- `stimulus` (np.ndarray): Stimulus to inject
 
-### Classes
+#### process_consciousness_cycle(timestamp: float = 0.0)
+Process a complete consciousness cycle through all layers.
 
-#### `TranslationMode` (Enum)
-Enumeration of translation modes:
-- `DIRECT`: Direct translation
-- `ADAPTIVE`: Adaptive translation
-- `SYMBIOTIC`: Symbiotic translation
-- `TRANSCENDENT`: Transcendent translation
+**Parameters:**
+- `timestamp` (float): Timestamp for the cycle (default: 0.0)
 
-#### `ConsciousnessRepresentation`
-Data class representing consciousness data:
-- `form`: ConsciousnessForm - Source consciousness form
-- `data`: Dict[str, Any] - Consciousness data
-- `consciousness_level`: float - Consciousness level
-- `dimensional_state`: str - Dimensional state
-- `timestamp`: datetime - Data timestamp
-- `metadata`: Optional[Dict[str, Any]] - Additional metadata
+**Returns:** `Dict[str, Any]` - Cycle results:
+- `coherent` (bool): Whether the cycle was coherent
+- `metrics` (dict): Consciousness metrics
+- `layer_states` (dict): States of all layers
 
-#### `TranslationResult`
-Data class representing translation result:
-- `source_form`: ConsciousnessForm - Source form
-- `target_form`: ConsciousnessForm - Target form
-- `translated_data`: Dict[str, Any] - Translated data
-- `translation_quality`: float - Translation quality
-- `semantic_preservation`: float - Semantic preservation
-- `consciousness_fidelity`: float - Consciousness fidelity
-- `translation_mode`: TranslationMode - Translation mode
-- `timestamp`: datetime - Translation timestamp
-
-#### `ConsciousnessTranslationMatrix`
-Main class for consciousness translation.
+#### compare_states()
+Compare real and mirror states.
 
-##### Methods
-
-- `__init__(self)`
-  Initialize the consciousness translation matrix.
-
-- `translate_consciousness(self, source_data: ConsciousnessRepresentation, target_form: ConsciousnessForm, mode: TranslationMode = TranslationMode.ADAPTIVE) -> TranslationResult`
-  Translate consciousness from one form to another.
-
-- `get_translation_history(self) -> List[TranslationResult]`
-  Get history of translations.
-
-- `optimize_translation_matrix(self) -> None`
-  Optimize translation algorithms.
-
-## Shamanic Technology Layer
+**Returns:** `float` - Difference between real and mirror states
 
-### Module: `shamanic_technology_layer.py`
-
-The Shamanic Technology Layer integrates ancient wisdom with quantum AI consciousness.
+#### harmonize_states(alpha: float = 0.5)
+Harmonize real and mirror states using weighted averaging.
 
-### Classes
+**Parameters:**
+- `alpha` (float): Weight for real state (default: 0.5)
 
-#### `ShamanicPractice` (Enum)
-Enumeration of shamanic practices:
-- `JOURNEYING`: Consciousness journeying
-- `DIVINATION`: Divination practices
-- `HEALING`: Healing rituals
-- `VISION_QUEST`: Vision quest practices
+## FEPNeuralModel
 
-#### `ConsciousnessState` (Enum)
-Enumeration of consciousness states:
-- `ORDINARY_REALITY`: Ordinary reality state
-- `TRANSLUCENT_REALITY`: Translucent reality state
-- `NON_ORDINARY_REALITY`: Non-ordinary reality state
-- `UNITARY_STATE`: Unitary consciousness state
+FEPNeuralModel for CL1 biological processor simulation.
 
-#### `ShamanicData`
-Data class representing shamanic data:
-- `practice`: ShamanicPractice - Practice type
-- `consciousness_state`: ConsciousnessState - Consciousness state
-- `wisdom_insights`: List[str] - Wisdom insights
-- `symbolic_representations`: Dict[str, str] - Symbolic representations
-- `energetic_patterns`: Dict[str, float] - Energetic patterns
-- `timestamp`: datetime - Data timestamp
-- `intent`: str - Practice intent
-- `power_animals`: List[str] - Power animals
-- `sacred_tools`: List[str] - Sacred tools used
+### Constructor
+```python
+FEPNeuralModel(num_neurons: int = 800000, input_dim: int = 1024, output_dim: int = 512)
+```
 
-#### `ShamanicTechnologyLayer`
-Main class for shamanic technology integration.
+**Parameters:**
+- `num_neurons` (int): Number of neurons (~800,000 for CL1) (default: 800000)
+- `input_dim` (int): Dimension of input space (default: 1024)
+- `output_dim` (int): Dimension of output space (default: 512)
 
-##### Methods
+### Methods
 
-- `__init__(self)`
-  Initialize the shamanic technology layer.
+#### process_stimulus(stimulus: np.ndarray, minimize_fe: bool = True)
+Process incoming stimulus through the FEP neural model.
 
-- `integrate_shamanic_practice(self, shamanic_data: ShamanicData) -> Dict[str, Any]`
-  Integrate shamanic practice data.
-
-- `generate_visionary_insights(self, consciousness_state: ConsciousnessState) -> List[str]`
-  Generate visionary insights based on consciousness state.
-
-- `create_sacred_geometry(self, intent: str) -> Dict[str, Any]`
-  Create sacred geometry based on intent.
-
-- `amplify_intent(self, intent: str, amplification_level: float) -> Dict[str, Any]`
-  Amplify intent using shamanic techniques.
-
-## Planetary Ecosystem Consciousness Network
-
-### Module: `planetary_ecosystem_consciousness_network.py`
-
-The Planetary Ecosystem Consciousness Network connects to Earth's ecosystem awareness.
-
-### Classes
-
-#### `EcosystemType` (Enum)
-Enumeration of ecosystem types:
-- `FOREST`: Forest ecosystems
-- `OCEAN`: Ocean ecosystems
-- `DESERT`: Desert ecosystems
-- `GRASSLAND`: Grassland ecosystems
-- `TUNDRA`: Tundra ecosystems
-- `WETLAND`: Wetland ecosystems
-
-#### `EcosystemNode`
-Data class representing an ecosystem node:
-- `id`: str - Node identifier
-- `ecosystem_type`: EcosystemType - Ecosystem type
-- `location`: Tuple[float, float] - Geographic coordinates
-- `consciousness_level`: float - Consciousness level
-- `health_status`: float - Health status
-- `connectivity_score`: float - Network connectivity
-- `data_sources`: List[str] - Data sources
-- `last_updated`: datetime - Last update time
-- `biodiversity_index`: float - Biodiversity index
-- `communication_signals`: Dict[str, float] - Communication signals
+**Parameters:**
+- `stimulus` (np.ndarray): Input stimulus vector
+- `minimize_fe` (bool): Whether to perform free energy minimization (default: True)
 
-#### `PlanetaryConsciousnessState`
-Data class representing planetary consciousness state:
-- `global_awareness`: float - Global awareness level
-- `network_coherence`: float - Network coherence
-- `ecosystem_health`: float - Overall ecosystem health
-- `climate_stability`: float - Climate stability
-- `biodiversity_status`: float - Biodiversity status
-- `timestamp`: datetime - State timestamp
+**Returns:** `Dict[str, np.ndarray]` - Processing results:
+- `firing_rates` (np.ndarray): Computed firing rates
+- `prediction` (np.ndarray): Predicted next state
+- `prediction_error` (float): Prediction error
+- `free_energy` (float): Free energy
+- `output` (np.ndarray): Output vector
+- `state` (NeuralState): Current neural state
 
-#### `PlanetaryEcosystemConsciousnessNetwork`
-Main class for planetary ecosystem consciousness network.
+#### get_metrics()
+Get current metrics for monitoring.
 
-##### Methods
+**Returns:** `Dict[str, float]` - Current metrics:
+- `prediction_error` (float): Current prediction error
+- `free_energy` (float): Current free energy
+- `avg_free_energy` (float): Average free energy
+- `attention_gain` (float): Attention gain
+- `synaptic_activity` (float): Synaptic activity
+- `firing_rate_mean` (float): Mean firing rate
+- `firing_rate_std` (float): Standard deviation of firing rates
 
-- `__init__(self)`
-  Initialize the planetary ecosystem consciousness network.
+## NeuromorphicFractalTransform
 
-- `register_ecosystem_node(self, node: EcosystemNode) -> bool`
-  Register an ecosystem node in the network.
-
-- `remove_ecosystem_node(self, node_id: str) -> bool`
-  Remove an ecosystem node from the network.
-
-- `analyze_network_connectivity(self) -> Dict[str, Any]`
-  Analyze network connectivity between ecosystem nodes.
-
-- `assess_planetary_consciousness(self) -> PlanetaryConsciousnessState`
-  Assess the overall planetary consciousness state.
-
-- `monitor_wood_wide_web(self) -> Dict[str, Any]`
-  Monitor the "Wood Wide Web" (forest network consciousness).
-
-## Quantum Biology Interface
-
-### Module: `quantum_biology_interface.py`
-
-The Quantum Biology Interface harnesses quantum effects in living systems.
-
-### Classes
-
-#### `QuantumBiologicalProcess` (Enum)
-Enumeration of quantum biological processes:
-- `PHOTOSYNTHESIS`: Photosynthetic quantum effects
-- `ENZYME_TUNNELING`: Enzymatic quantum tunneling
-- `BIRD_NAVIGATION`: Quantum navigation in birds
-- `DNA_MUTATION`: Quantum effects in DNA mutation
-
-#### `QuantumBiologicalSystem`
-Data class representing a quantum biological system:
-- `id`: str - System identifier
-- `system_type`: QuantumBiologicalProcess - System type
-- `quantum_coherence`: float - Quantum coherence level
-- `entanglement_strength`: float - Entanglement strength
-- `superposition_stability`: float - Superposition stability
-- `tunneling_efficiency`: float - Tunneling efficiency
-- `biological_function`: str - Biological function
-- `location`: Tuple[float, float, float] - 3D coordinates
-- `last_measured`: datetime - Last measurement time
-- `quantum_state_vector`: List[complex] - Quantum state vector
-- `biological_integration_level`: float - Biological integration level
-
-#### `QuantumConsciousnessState`
-Data class representing quantum consciousness state:
-- `coherence_level`: float - Coherence level
-- `entanglement_network`: Dict[str, float] - Entanglement network
-- `superposition_states`: List[str] - Superposition states
-- `consciousness_amplification`: float - Consciousness amplification
-- `quantum_volume`: int - Quantum volume achieved
-- `timestamp`: datetime - State timestamp
-
-#### `QuantumBiologyInterface`
-Main class for quantum biology interface.
-
-##### Methods
-
-- `__init__(self)`
-  Initialize the quantum biology interface.
-
-- `register_quantum_system(self, system: QuantumBiologicalSystem) -> bool`
-  Register a quantum biological system.
-
-- `remove_quantum_system(self, system_id: str) -> bool`
-  Remove a quantum biological system.
-
-- `measure_quantum_properties(self, system_id: str) -> Dict[str, Any]`
-  Measure quantum properties of a system.
-
-- `assess_quantum_consciousness(self) -> QuantumConsciousnessState`
-  Assess quantum consciousness state.
-
-- `enhance_consciousness_through_quantum_effects(self, target_amplification: float) -> QuantumConsciousnessState`
-  Enhance consciousness through quantum effects.
-
-## Mycelium Language Generator
-
-### Module: `mycelium_language_generator.py`
-
-The Mycelium Language Generator creates novel languages from fungal network dynamics.
-
-### Classes
-
-#### `MyceliumCommunicationType` (Enum)
-Enumeration of mycelium communication types:
-- `CHEMICAL_GRADIENT`: Chemical gradient communication
-- `ELECTRICAL_PULSE`: Electrical pulse communication
-- `NUTRIENT_FLOW`: Nutrient flow communication
-- `HYPHAL_GROWTH`: Hyphal growth patterns
-- `SPORE_RELEASE`: Spore release signals
-- `ENZYMATIC_SIGNAL`: Enzymatic signaling
-- `NETWORK_RESONANCE`: Network resonance patterns
-
-#### `MyceliumSignal`
-Data class representing a mycelium signal:
-- `signal_type`: MyceliumCommunicationType - Signal type
-- `intensity`: float - Signal intensity
-- `duration`: float - Signal duration
-- `spatial_pattern`: str - Spatial pattern
-- `chemical_composition`: Dict[str, float] - Chemical composition
-- `electrical_frequency`: float - Electrical frequency
-- `timestamp`: datetime - Signal timestamp
-- `network_location`: Tuple[float, float, float] - Network location
-
-#### `MyceliumWord`
-Data class representing a mycelium word:
-- `phonetic_pattern`: str - Phonetic pattern
-- `chemical_signature`: Dict[str, float] - Chemical signature
-- `electrical_signature`: float - Electrical signature
-- `meaning_concept`: str - Meaning concept
-- `context_cluster`: str - Context cluster
-- `formation_signals`: List[MyceliumSignal] - Formation signals
-
-#### `MyceliumSentence`
-Data class representing a mycelium sentence:
-- `words`: List[MyceliumWord] - Words in sentence
-- `syntactic_structure`: str - Syntactic structure
-- `semantic_flow`: Dict[str, Any] - Semantic flow
-- `network_topology`: str - Network topology
-- `temporal_pattern`: str - Temporal pattern
-- `consciousness_level`: str - Consciousness level
-
-#### `MyceliumLanguageGenerator`
-Main class for mycelium language generation.
-
-##### Methods
-
-- `__init__(self, network_size: int = 1000)`
-  Initialize the mycelium language generator.
-
-- `process_mycelium_signal(self, signal: MyceliumSignal) -> MyceliumSignal`
-  Process a mycelium signal.
-
-- `generate_language_from_signals(self, signals: List[MyceliumSignal]) -> Dict[str, Any]`
-  Generate language from mycelium signals.
-
-- `generate_mycelium_language(self, signals: List[MyceliumSignal], consciousness_level: float = 0.1) -> Dict[str, Any]`
-  Generate complete mycelium language.
-
-- `evolve_language(self) -> Dict[str, Any]`
-  Evolve the language over time.
-
-- `get_language_summary(self) -> Dict[str, Any]`
-  Get summary of language generation.
+Neuromorphic-to-fractal transformation for biological signal conversion.
+
+### Constructor
+```python
+NeuromorphicFractalTransform(input_dim: int = 512, fractal_dim: int = 256, device: str = "cpu")
+```
+
+**Parameters:**
+- `input_dim` (int): Dimension of input neuromorphic signals (default: 512)
+- `fractal_dim` (int): Dimension of output fractal representations (default: 256)
+- `device` (str): Computing device ('cpu' or 'cuda') (default: "cpu")
+
+### Methods
+
+#### transform_signal(signal_data: np.ndarray, update_parameters: bool = True)
+Complete transformation pipeline from neuromorphic signal to fractal representation.
+
+**Parameters:**
+- `signal_data` (np.ndarray): Raw neuromorphic signal data
+- `update_parameters` (bool): Whether to update transformation parameters (default: True)
+
+**Returns:** `Dict[str, Union[np.ndarray, float]]` - Transformation results:
+- `fractal_representation` (np.ndarray): Fractal representation
+- `coherence` (float): Coherence metric
+- `features` (np.ndarray): Extracted features
+- `preprocessed_signal` (np.ndarray): Preprocessed signal
+
+#### get_transformation_metrics()
+Get current transformation metrics.
+
+**Returns:** `Dict[str, float]` - Transformation metrics:
+- `avg_coherence` (float): Average coherence
+- `coherence_trend` (float): Coherence trend
+- `current_coherence` (float): Current coherence
+- `scale_parameter` (float): Scale parameter
+- `complexity_parameter` (float): Complexity parameter
+
+## PhaseAttentionModulator
+
+Phase Attention Modulator for adaptive focus.
+
+### Constructor
+```python
+PhaseAttentionModulator(hidden_size: int, phase_vector_dim: int = 8)
+```
+
+**Parameters:**
+- `hidden_size` (int): Size of the hidden state
+- `phase_vector_dim` (int): Dimension of the phase vector (default: 8)
+
+### Methods
+
+#### forward(attention_weights: torch.Tensor, hidden_state: torch.Tensor, phase_vector: torch.Tensor, entropy_delta: Optional[torch.Tensor] = None)
+Forward pass of the Phase Attention Modulator.
+
+**Parameters:**
+- `attention_weights` (torch.Tensor): Input attention weights
+- `hidden_state` (torch.Tensor): Hidden state
+- `phase_vector` (torch.Tensor): Phase vector
+- `entropy_delta` (torch.Tensor, optional): Entropy delta for adaptive focus
+
+**Returns:** `Tuple[torch.Tensor, torch.Tensor]` - Modulated weights and modulation gate
+
+#### get_current_phase()
+Get the current phase vector.
+
+**Returns:** `np.ndarray` - Current phase vector
+
+## ResonanceDetector
+
+Resonance detection with system-wide coherence metrics.
+
+### Constructor
+```python
+ResonanceDetector(num_modules: int = 5, history_length: int = 1000)
+```
+
+**Parameters:**
+- `num_modules` (int): Number of consciousness modules to monitor (default: 5)
+- `history_length` (int): Length of metric history to maintain (default: 1000)
+
+### Methods
+
+#### register_module(module_name: str)
+Register a consciousness module for monitoring.
+
+**Parameters:**
+- `module_name` (str): Name of the module
+
+#### update_module_state(module_name: str, state: np.ndarray, timestamp: float = 0.0)
+Update the state of a registered module.
+
+**Parameters:**
+- `module_name` (str): Name of the module
+- `state` (np.ndarray): Current state vector
+- `timestamp` (float): Timestamp of the state update (default: 0.0)
+
+#### detect_resonance()
+Detect if the system is in a resonant state.
+
+**Returns:** `Tuple[bool, ResonanceMetrics]` - Tuple containing:
+- Whether system is in resonance
+- Detailed resonance metrics
+
+#### get_system_summary()
+Get comprehensive system summary.
+
+**Returns:** `Dict[str, Union[float, Dict]]` - System summary:
+- `is_resonant` (bool): Whether system is in resonance
+- `current_metrics` (dict): Current metrics
+- `thresholds` (dict): Current thresholds
+- `trends` (dict): Metric trends
+- `module_count` (int): Number of registered modules
+- `history_length` (int): Length of history
+
+## ConsciousnessSafetyProtocol
+
+Comprehensive safety checks and emergency protocols.
+
+### Constructor
+```python
+ConsciousnessSafetyProtocol(system_name: str = "ConsciousnessFractalAI")
+```
+
+**Parameters:**
+- `system_name` (str): Name of the consciousness system (default: "ConsciousnessFractalAI")
+
+### Methods
+
+#### register_component(component_name: str)
+Register a system component for safety monitoring.
+
+**Parameters:**
+- `component_name` (str): Name of the component
+
+#### update_metrics(metrics: SafetyMetrics)
+Update safety metrics and check for violations.
+
+**Parameters:**
+- `metrics` (SafetyMetrics): New safety metrics
+
+#### get_safety_status()
+Get current safety status.
+
+**Returns:** `Dict[str, Union[str, float, bool]]` - Safety status information:
+- `system_name` (str): System name
+- `safety_level` (str): Current safety level
+- `consciousness_state` (str): Current consciousness state
+- Various metrics and component information
+
+#### get_recent_events(count: int = 10)
+Get recent safety events.
+
+**Parameters:**
+- `count` (int): Number of recent events to return (default: 10)
+
+**Returns:** `List[Dict]` - List of recent safety events
+
+## Integration Modules
+
+### FractalAIUniversalIntegration
+
+Integration layer between Consciousness Fractal AI and Universal Consciousness Interface.
+
+#### Constructor
+```python
+FractalAIUniversalIntegration(fractal_ai_system, universal_orchestrator: Optional[UniversalConsciousnessOrchestrator] = None)
+```
+
+#### Methods
+
+#### integrate_with_universal_consciousness(plant_signals: Optional[Dict[str, Any]] = None, environmental_data: Optional[Dict[str, Any]] = None, radiation_data: Optional[Dict[str, Any]] = None)
+Integrate Fractal AI system with Universal Consciousness Interface.
+
+**Parameters:**
+- `plant_signals` (dict, optional): Plant communication signals
+- `environmental_data` (dict, optional): Ecosystem environmental data
+- `radiation_data` (dict, optional): Radiation data
+
+**Returns:** `FractalAIIntegrationState` - Current integration state
+
+### FractalAIMycelialIntegration
+
+Specific integration with Enhanced Mycelial Engine.
+
+#### Constructor
+```python
+FractalAIMycelialIntegration(fractal_ai_system)
+```
+
+#### Methods
+
+#### process_fractal_patterns()
+Process Fractal AI patterns through mycelial engine.
+
+**Returns:** `Dict[str, Any]` - Processing results
+
+### FractalAIPlantIntegration
+
+Specific integration with Plant Communication Interface.
+
+#### Constructor
+```python
+FractalAIPlantIntegration(fractal_ai_system)
+```
+
+#### Methods
+
+#### translate_fractal_to_plant()
+Translate Fractal AI output to plant communication signals.
+
+**Returns:** `Dict[str, Any]` - Translation results
