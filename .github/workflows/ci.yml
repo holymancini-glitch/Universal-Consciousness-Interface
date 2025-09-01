@@ -93,22 +93,26 @@ jobs:
       run: bandit -r core/ -f json -o bandit-report.json
 
     - name: ☢️ Radiation Safety Protocol Check
-      run: python -c "
-        from core.consciousness_safety_framework import ConsciousnessSafetyFramework;
-        framework = ConsciousnessSafetyFramework();
-        result = framework.validate_radiation_safety_limits(25.0);
-        assert result['is_safe'] == False, 'Radiation safety limits working';
-        result = framework.validate_radiation_safety_limits(5.0);
-        assert result['is_safe'] == True, 'Safe radiation levels working';
+      run: |
+        python -c "
+        from core.consciousness_safety_framework import ConsciousnessSafetyFramework
+        framework = ConsciousnessSafetyFramework()
+        result = framework.validate_radiation_safety_limits(25.0)
+        assert result['is_safe'] == False, 'Radiation safety limits working'
+        result = framework.validate_radiation_safety_limits(5.0)
+        assert result['is_safe'] == True, 'Safe radiation levels working'
         print('✅ Radiation safety protocols validated')
-      "
+        "
 
-    - name: 🧬 Bio-Digital Safety Protocol Check  
-      run: python -c "
-        from core.consciousness_safety_framework import ConsciousnessSafetyFramework;
-        framework = ConsciousnessSafetyFramework();
+    - name: 🧬 Bio-Digital Safety Protocol Check
+      run: |
+        python -c "
+        from core.consciousness_safety_framework import ConsciousnessSafetyFramework
+        framework = ConsciousnessSafetyFramework()
+        is_safe = framework.pre_cycle_safety_check()
+        assert is_safe, 'Bio-digital pre-cycle safety check failed'
         print('✅ Bio-digital safety protocols validated')
-      "
+        "
 
   documentation-check:
     name: 📚 Revolutionary Documentation Validation

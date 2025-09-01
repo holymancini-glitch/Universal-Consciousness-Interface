@@ -58,6 +58,13 @@ class ConsciousnessSafetyFramework:
         self.safety_check_interval: timedelta = timedelta(seconds=1)
         
         logger.info("🛡️ Consciousness Safety Framework Initialized")
+
+    def validate_radiation_safety_limits(self, radiation_level: float) -> Dict[str, Any]:
+        """Validate radiation levels against safety limits"""
+        # This is a mock implementation. In a real scenario, this would involve
+        # complex calculations and sensor data.
+        is_safe = radiation_level < 10.0  # Example threshold
+        return {"is_safe": is_safe, "radiation_level": radiation_level}
     
     def _initialize_safety_limits(self) -> Dict[str, Dict[str, Any]]:
         """Initialize safety limits for all consciousness modules"""
