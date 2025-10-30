@@ -143,11 +143,12 @@ class QuantumMycelialTopologyProcessor:
         
         if len(self.mycelial_network.nodes()) > 0:
             features['avg_degree'] = np.mean([d for n, d in self.mycelial_network.degree()])
-            
+
             try:
                 clustering = nx.clustering(self.mycelial_network)
                 features['avg_clustering'] = np.mean(list(clustering.values()))
-            except:
+            except (ZeroDivisionError, ValueError) as e:
+                logger.debug(f"Clustering calculation failed: {e}")
                 features['avg_clustering'] = 0.0
         
         self.topology_features_cache = features
@@ -255,7 +256,8 @@ class QuantumNLPProcessor:
                     'consciousness_encoding': params.tolist(),
                     'quantum_linguistic_active': True
                 }
-            except:
+            except (AttributeError, ValueError, ImportError) as e:
+                self.logger.debug(f"Lambeq circuit creation failed: {e}")
                 pass
         
         # Fallback simulation

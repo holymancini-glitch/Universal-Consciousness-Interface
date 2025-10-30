@@ -369,10 +369,11 @@ class OscilloscopePlantInterface:
             
             if len(data) < m + 1:
                 return 0.5
-            
+
             try:
                 return _phi_m(m) - _phi_m(m + 1)
-            except:
+            except (ValueError, ZeroDivisionError, RecursionError) as e:
+                logger.debug(f"Entropy calculation failed: {e}")
                 return 0.5
         
         analysis['complexity'] = approximate_entropy(voltages_array)

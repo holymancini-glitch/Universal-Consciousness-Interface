@@ -163,7 +163,8 @@ class SensoryIOSystem:
                 noise_level = np.std(values) / (np.mean(values) + 1e-8)  # Avoid division by zero
                 noise_confidence = max(0.0, 1.0 - noise_level)
                 return (completeness + noise_confidence) / 2.0
-            except:
+            except (AttributeError, ValueError, TypeError, ZeroDivisionError) as e:
+                logger.debug(f"Noise calculation failed: {e}")
                 return completeness
         
         return completeness

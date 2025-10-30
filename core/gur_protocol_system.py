@@ -357,12 +357,13 @@ class GURProtocol:
             try:
                 # Calculate shortest paths to other nodes
                 paths = dict(nx.single_source_shortest_path_length(graph, source, cutoff=self.unfolding_depth))
-                
+
                 if paths:
                     node_max_depth = max(paths.values())
                     max_depth = max(max_depth, node_max_depth)
                     total_paths += len(paths)
-            except:
+            except (nx.NetworkXError, ValueError) as e:
+                logger.debug(f"Path calculation failed for node {source}: {e}")
                 continue
         
         # Unfolding efficiency based on network depth and connectivity
