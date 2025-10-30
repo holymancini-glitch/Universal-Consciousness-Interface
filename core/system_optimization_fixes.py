@@ -113,12 +113,13 @@ class PerformanceOptimizer:
             try:
                 gpu_memory = torch.cuda.get_device_properties(0).total_memory / (1024**3)  # GB
                 gpu_analysis['total_gpu_memory_gb'] = gpu_memory
-                
+
                 if hasattr(torch.cuda, 'memory_allocated'):
                     allocated = torch.cuda.memory_allocated(0) / (1024**3)
                     gpu_analysis['allocated_memory_gb'] = allocated
                     gpu_analysis['memory_utilization'] = allocated / gpu_memory
-            except:
+            except (RuntimeError, AttributeError, IndexError) as e:
+                logger.debug(f"Unable to retrieve GPU memory info: {e}")
                 gpu_analysis['memory_info'] = "Unable to retrieve GPU memory info"
         
         return gpu_analysis

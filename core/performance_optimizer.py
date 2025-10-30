@@ -207,12 +207,13 @@ class MemoryOptimizer:
             }
             
             self.memory_usage_history.append(usage_data)
-            
+
             if memory_percent > self.gc_threshold:
                 self.trigger_memory_optimization()
-            
+
             return usage_data
-        except:
+        except (AttributeError, OSError, PermissionError) as e:
+            logger.debug(f"Memory usage measurement failed: {e}")
             return {'memory_percent': 0.0, 'memory_mb': 0.0}
     
     def trigger_memory_optimization(self):
