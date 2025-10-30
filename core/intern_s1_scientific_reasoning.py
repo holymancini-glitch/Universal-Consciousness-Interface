@@ -33,7 +33,7 @@ try:
     from transformers import AutoProcessor, AutoModelForCausalLM
     TRANSFORMERS_AVAILABLE = True
 except ImportError:
-    print("Transformers not available, using scientific reasoning simulation")
+    logging.warning("Transformers not available, using scientific reasoning simulation")
     TRANSFORMERS_AVAILABLE = False
 
 # Universal Consciousness Interface imports

@@ -21,7 +21,7 @@ try:
     from lambeq import BobcatParser, IQPAnsatz, AtomicType
     LAMBEQ_AVAILABLE = True
 except ImportError:
-    print("Lambeq not available, using quantum linguistics simulation")
+    logging.warning("Lambeq not available, using quantum linguistics simulation")
     LAMBEQ_AVAILABLE = False
 
 # Universal Consciousness Interface imports

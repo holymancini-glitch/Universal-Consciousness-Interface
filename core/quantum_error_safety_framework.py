@@ -33,7 +33,7 @@ try:
     from pytket.backends import Backend
     TKET_AVAILABLE = True
 except ImportError:
-    print("TKET2 not available, using quantum safety simulation")
+    logging.warning("TKET2 not available, using quantum safety simulation")
     TKET_AVAILABLE = False
 
 try:
@@ -43,7 +43,7 @@ try:
     from qermit.noise_model import NoiseModel
     QERMIT_AVAILABLE = True
 except ImportError:
-    print("Qermit not available, using error mitigation simulation")
+    logging.warning("Qermit not available, using error mitigation simulation")
     QERMIT_AVAILABLE = False
 
 try:
@@ -51,7 +51,7 @@ try:
     import hugr
     HUGR_AVAILABLE = True
 except ImportError:
-    print("Hugr not available, using program representation simulation")
+    logging.warning("Hugr not available, using program representation simulation")
     HUGR_AVAILABLE = False
 
 # Universal Consciousness Interface imports
