@@ -138,6 +138,206 @@ class MycelialNode:
             self.resources[resource_type] = max(0.0, min(2.0, self.resources[resource_type]))
 
 class FungalNeuroglia:
+    """
+    Грибна нейроглія - розподілена мережа обробки інформації
+    """
+    
+    def __init__(self, network_size: int = 100):
+        self.network_size = network_size
+        self.nodes = self._create_network()
+        self.global_state = torch.zeros(64)
+        self.collective_memory = []
+        self.synchronization_frequency = 0.1
+        
+    def _create_network(self) -> Dict[str, MycelialNode]:
+        """
+        Створення міцелієвої мережі
+        """
+        nodes = {}
+        
+        # Створення вузлів
+        for i in range(self.network_size):
+            node_id = f"node_{i}"
+            # Випадкові позиції в 2D просторі
+            position = (np.random.uniform(0, 100), np.random.uniform(0, 100))
+            nodes[node_id] = MycelialNode(node_id, position)
+        
+        # Створення з'єднань на основі відстані
+        node_list = list(nodes.values())
+        for i, node1 in enumerate(node_list):
+            for j, node2 in enumerate(node_list[i+1:], i+1):
+                distance = self._calculate_distance(node1.position, node2.position)
+                
+                # Ймовірність з'єднання залежить від відстані
+                connection_probability = np.exp(-distance / 20)  # Експоненційне спадання
+                
+                if np.random.random() < connection_probability:
+                    # Сила з'єднання обернено пропорційна відстані
+                    strength = max(0.1, 1.0 - distance / 100)
+                    node1.connect_to(node2, strength)
+        
+        return nodes
+    
+    def _calculate_distance(self, pos1: Tuple[float, float], pos2: Tuple[float, float]) -> float:
+        """
+        Обчислення Евклідової відстані між вузлами
+        """
+        return np.sqrt((pos1[0] - pos2[0])**2 + (pos1[1] - pos2[1])**2)
+    
+    def propagate_signal(self, source_node_id: str, signal: torch.Tensor, max_hops: int = 5):
+        """
+        Поширення сигналу через мережу
+        """
+        if source_node_id not in self.nodes:
+            return
+        
+        # Ініціалізація поширення
+        visited = set()
+        current_layer = {source_node_id: signal}
+        
+        for hop in range(max_hops):
+            if not current_layer:
+                break
+                
+            next_layer = {}
+            
+            for node_id, node_signal in current_layer.items():
+                if node_id in visited:
+                    continue
+                    
+                visited.add(node_id)
+                current_node = self.nodes[node_id]
+                
+                # Відправка сигналу до сусідів
+                for neighbor_id, connection_strength in current_node.connections.items():
+                    if neighbor_id not in visited:
+                        # Ослаблення сигналу з відстанню
+                        attenuated_signal = node_signal * connection_strength * (0.8 ** hop)
+                        
+                        # Додавання шуму для реалістичності
+                        noise = torch.randn_like(attenuated_signal) * 0.01
+                        final_signal = attenuated_signal + noise
+                        
+                        # Накопичення сигналів від різних джерел
+                        if neighbor_id in next_layer:
+                            next_layer[neighbor_id] = next_layer[neighbor_id] + final_signal
+                        else:
+                            next_layer[neighbor_id] = final_signal
+                        
+                        # Доставка сигналу до вузла
+                        self.nodes[neighbor_id].receive_signal(final_signal, node_id)
+            
+            current_layer = next_layer
+    
+    def collective_decision_making(self, decision_options: List[torch.Tensor]) -> int:
+        """
+        Колективне прийняття рішень через консенсус мережі
+        """
+        if not decision_options:
+            return 0
+        
+        # Голосування кожного вузла
+        votes = torch.zeros(len(decision_options))
+        
+        for node in self.nodes.values():
+            # Кожен вузол оцінює опції на основі свого стану
+            node_votes = torch.zeros(len(decision_options))
+            
+            for i, option in enumerate(decision_options):
+                # Схожість опції зі станом вузла
+                if len(option) == len(node.state):
+                    similarity = torch.cosine_similarity(
+                        option.unsqueeze(0), 
+                        node.state.unsqueeze(0)
+                    ).item()
+                    node_votes[i] = similarity
+                else:
+                    # Випадкове голосування, якщо розміри не співпадають
+                    node_votes[i] = np.random.random()
+            
+            # Зважування голосу за енергією вузла
+            weight = node.resources['energy']
+            votes += node_votes * weight
+        
+        # Вибір опції з найбільшою кількістю голосів
+        best_option = torch.argmax(votes).item()
+        
+        # Збереження рішення в колективній пам'яті
+        decision_record = {
+            'timestamp': len(self.collective_memory),
+            'options': decision_options,
+            'votes': votes,
+            'chosen_option': best_option,
+            'consensus_strength': torch.max(votes).item() / torch.sum(votes).item()
+        }
+        self.collective_memory.append(decision_record)
+        
+        return best_option
+    
+    def synchronize_network(self):
+        """
+        Синхронізація всієї мережі
+        """
+        # Збір глобального стану
+        all_states = torch.stack([node.state for node in self.nodes.values()])
+        self.global_state = torch.mean(all_states, dim=0)
+        
+        # Синхронізація частоти
+        for node in self.nodes.values():
+            # Підтягування стану вузла до глобального
+            sync_factor = self.synchronization_frequency
+            node.state = node.state * (1 - sync_factor) + self.global_state * sync_factor
+            
+            # Оновлення стану вузла
+            node.update_state()
+        
+        # Розподіл ресурсів
+        self._redistribute_resources()
+    
+    def _redistribute_resources(self):
+        """
+        Перерозподіл ресурсів у мережі
+        """
+        node_list = list(self.nodes.values())
+        
+        for resource_type in ['energy', 'information', 'nutrients']:
+            # Знаходження вузлів з надлишком та нестачею
+            excess_nodes = [node for node in node_list if node.resources[resource_type] > 1.5]
+            deficit_nodes = [node for node in node_list if node.resources[resource_type] < 0.5]
+            
+            # Перерозподіл від надлишкових до дефіцитних
+            for excess_node in excess_nodes:
+                excess_node.share_resources(deficit_nodes, resource_type)
+    
+    def get_network_metrics(self) -> Dict[str, float]:
+        """
+        Отримання метрик мережі
+        """
+        node_list = list(self.nodes.values())
+        
+        # Зв'язність мережі
+        total_connections = sum(len(node.connections) for node in node_list)
+        avg_connectivity = total_connections / len(node_list) if node_list else 0
+        
+        # Синхронізація мережі
+        states = torch.stack([node.state for node in node_list])
+        synchronization = 1.0 - torch.std(states).item()
+        
+        # Розподіл ресурсів
+        energies = [node.resources['energy'] for node in node_list]
+        energy_balance = 1.0 - np.std(energies) / (np.mean(energies) + 1e-8)
+        
+        # Активність мережі
+        total_memory = sum(len(node.memory) for node in node_list)
+        network_activity = min(1.0, total_memory / (len(node_list) * 50))
+        
+        return {
+            'connectivity': avg_connectivity,
+            'synchronization': max(0.0, min(1.0, synchronization)),
+            'energy_balance': max(0.0, min(1.0, energy_balance)),
+            'network_activity': network_activity,
+            'collective_decisions': len(self.collective_memory)
+        }
 
 class CollectiveIntelligence:
     """
@@ -512,8 +712,6 @@ class CollectiveIntelligence:
 # ===================================================================
 # 🌅 5. META-CONSCIOUSNESS LAYER - Рівень Метасвідомості
 # ===================================================================
-
-class AwakenedGarden:
 
 
 __all__ = ['MycelialNode', 'CollectiveIntelligence']
