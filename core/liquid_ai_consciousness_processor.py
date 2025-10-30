@@ -33,7 +33,7 @@ try:
     from transformers import AutoProcessor, AutoModelForCausalLM
     LIQUID_AI_AVAILABLE = True
 except ImportError:
-    print("Transformers not available for LFM2, using simulation mode")
+    logging.warning("Transformers not available for LFM2, using simulation mode")
     LIQUID_AI_AVAILABLE = False
 
 # Scientific computing

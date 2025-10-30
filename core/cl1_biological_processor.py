@@ -36,7 +36,7 @@ try:
     import cl_api
     from cl_api import CL1Device, BiOSInterface, NeuronCulture
 except ImportError:
-    print("CL1 API not available, using simulation mode")
+    logging.warning("CL1 API not available, using simulation mode")
     cl_api = None
 
 # Scientific computing imports

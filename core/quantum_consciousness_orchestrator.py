@@ -27,7 +27,8 @@ try:
     from cudaq import *
 except ImportError:
     # Fallback for development without CUDA Quantum
-    print("CUDA Quantum not available, using simulation mode")
+    logger = logging.getLogger(__name__)
+    logger.warning("CUDA Quantum not available, using simulation mode")
     cudaq = None
 
 try:
@@ -36,7 +37,8 @@ try:
     from guppylang.std.quantum import *
     from guppylang.std.builtins import owned
 except ImportError:
-    print("Guppy not available, using simulation mode")
+    logger = logging.getLogger(__name__)
+    logger.warning("Guppy not available, using simulation mode")
     guppy = None
 
 try:
@@ -44,7 +46,8 @@ try:
     from selene_sim import build, Quest, Stim, DepolarizingErrorModel, SoftRZRuntime
     from hugr.qsystem.result import QsysShot, QsysResult
 except ImportError:
-    print("Selene not available, using simulation mode")
+    logger = logging.getLogger(__name__)
+    logger.warning("Selene not available, using simulation mode")
     build = None
 
 try:
@@ -52,7 +55,8 @@ try:
     import lambeq
     from lambeq import BobcatParser
 except ImportError:
-    print("Lambeq not available, using simulation mode")
+    logger = logging.getLogger(__name__)
+    logger.warning("Lambeq not available, using simulation mode")
     lambeq = None
 
 # Universal Consciousness Interface imports
