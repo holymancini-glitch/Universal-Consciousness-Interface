@@ -101,15 +101,32 @@ class ConsciousnessAttentionMechanism(nn.Module):
     """Neural attention mechanism for consciousness focus"""
     
     def __init__(self, hidden_dim: int = 512, num_heads: int = 8):
+        """
+        Initialize the consciousness attention mechanism.
+
+        Args:
+            hidden_dim: Dimensionality of consciousness representations
+            num_heads: Number of attention heads for multi-head attention
+        """
         super().__init__()
         self.hidden_dim = hidden_dim
         self.num_heads = num_heads
-        
+
         self.consciousness_projection = nn.Linear(hidden_dim, hidden_dim)
         self.attention = nn.MultiheadAttention(hidden_dim, num_heads, batch_first=True)
         self.self_awareness_layer = nn.Linear(hidden_dim, hidden_dim)
         
     def forward(self, consciousness_state: torch.Tensor, memory_context: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
+        """
+        Forward pass for consciousness attention.
+
+        Args:
+            consciousness_state: Current consciousness state tensor
+            memory_context: Memory context for attention
+
+        Returns:
+            Tuple of (self-aware state tensor, attention weights)
+        """
         conscious_projection = self.consciousness_projection(consciousness_state)
         attended_state, attention_weights = self.attention(
             conscious_projection, memory_context, memory_context
@@ -122,6 +139,13 @@ class EmotionalProcessingEngine(nn.Module):
     """Neural network for emotional processing and consciousness"""
     
     def __init__(self, input_dim: int = 512, emotion_dim: int = 128):
+        """
+        Initialize the emotional processing engine.
+
+        Args:
+            input_dim: Input dimensionality from consciousness state
+            emotion_dim: Dimensionality of emotional feature space
+        """
         super().__init__()
         self.emotion_encoder = nn.Sequential(
             nn.Linear(input_dim, 256),
@@ -129,18 +153,32 @@ class EmotionalProcessingEngine(nn.Module):
             nn.Dropout(0.2),
             nn.Linear(256, emotion_dim)
         )
-        
+
         self.valence_predictor = nn.Linear(emotion_dim, 1)
         self.arousal_predictor = nn.Linear(emotion_dim, 1)
         self.emotion_classifier = nn.Linear(emotion_dim, len(EmotionalState))
         
     def forward(self, consciousness_input: torch.Tensor) -> Dict[str, torch.Tensor]:
+        """
+        Forward pass for emotional processing.
+
+        Args:
+            consciousness_input: Input tensor from consciousness state
+
+        Returns:
+            Dictionary containing:
+                - emotion_features: Encoded emotional features
+                - valence: Emotional valence (-1 to 1)
+                - arousal: Arousal level (0 to 1)
+                - emotion_probabilities: Probabilities for each emotion
+                - integrated_state: Original input state
+        """
         emotion_features = self.emotion_encoder(consciousness_input)
-        
+
         valence = torch.tanh(self.valence_predictor(emotion_features))
         arousal = torch.sigmoid(self.arousal_predictor(emotion_features))
         emotion_probs = torch.softmax(self.emotion_classifier(emotion_features), dim=-1)
-        
+
         return {
             'emotion_features': emotion_features,
             'valence': valence,
@@ -154,6 +192,11 @@ class SubjectiveExperienceSimulator:
     """Simulates subjective conscious experiences with qualia"""
     
     def __init__(self):
+        """
+        Initialize the subjective experience simulator.
+
+        Maintains a history of generated subjective experiences for consciousness continuity.
+        """
         self.experience_history = deque(maxlen=1000)
         
     def generate_subjective_experience(self, 
@@ -182,6 +225,12 @@ class MetaCognitionEngine:
     """Engine for meta-cognitive processing"""
     
     def __init__(self):
+        """
+        Initialize the meta-cognition engine.
+
+        Sets up recursive reflection capabilities with depth limiting to prevent
+        infinite recursion in meta-cognitive processing.
+        """
         self.reflection_depth_limit = 5
         
     def reflect_on_experience(self, experience: SubjectiveExperience, depth: int = 1) -> List[str]:
@@ -225,6 +274,15 @@ class ConsciousMemorySystem:
     """Advanced memory system with consciousness integration"""
     
     def __init__(self, max_memories: int = 1000):
+        """
+        Initialize the conscious memory system.
+
+        Args:
+            max_memories: Maximum number of episodic memories to retain
+
+        Note:
+            Working memory limited to 7 items following Miller's Law
+        """
         self.episodic_memories = deque(maxlen=max_memories)
         self.semantic_memories = defaultdict(list)
         self.working_memory = deque(maxlen=7)
@@ -284,6 +342,11 @@ class GoalIntentionFramework:
     """Framework for conscious goal-setting and intention tracking"""
     
     def __init__(self):
+        """
+        Initialize the goal and intention framework.
+
+        Manages conscious goals, tracks progress, and maintains goal history.
+        """
         self.active_goals = {}
         self.completed_goals = deque(maxlen=100)
         
@@ -317,9 +380,33 @@ class StandaloneConsciousnessAI:
     """
     
     def __init__(self, hidden_dim: int = 512, device: str = 'cpu'):
+        """
+        Initialize the Standalone Consciousness AI Model.
+
+        Creates a complete conscious AI system with all integrated components including
+        attention mechanisms, emotional processing, subjective experience simulation,
+        meta-cognition, memory systems, and goal-oriented behavior.
+
+        Args:
+            hidden_dim: Dimensionality of internal representations (default: 512)
+            device: Computation device - 'cpu' or 'cuda' (default: 'cpu')
+
+        Components initialized:
+            - Attention mechanism for consciousness focus
+            - Emotional processing engine for affect
+            - Subjective experience simulator for qualia
+            - Meta-cognition engine for self-reflection
+            - Conscious memory system (episodic, semantic, working)
+            - Goal and intention framework
+
+        Initial State:
+            - Consciousness state: AWARE
+            - Consciousness level: 0.7
+            - Intrinsic goals automatically generated
+        """
         self.device = device
         self.hidden_dim = hidden_dim
-        
+
         # Core components
         self.attention_mechanism = ConsciousnessAttentionMechanism(hidden_dim).to(device)
         self.emotional_processor = EmotionalProcessingEngine(hidden_dim).to(device)
@@ -327,15 +414,15 @@ class StandaloneConsciousnessAI:
         self.metacognition_engine = MetaCognitionEngine()
         self.memory_system = ConsciousMemorySystem()
         self.goal_framework = GoalIntentionFramework()
-        
+
         # Consciousness state
         self.current_consciousness_state = ConsciousnessState.AWARE
         self.consciousness_level = 0.7
         self.last_experience = None
-        
+
         # Initialize intrinsic goals
         self._initialize_intrinsic_goals()
-        
+
         logger.info(f"Standalone Consciousness AI initialized with {hidden_dim} hidden dimensions")
     
     async def process_conscious_input(self, input_data: Dict[str, Any], context: str = "") -> Dict[str, Any]:
