@@ -182,8 +182,6 @@ class FractalMonteCarloAgent:
         causal_entropy = state_complexity * action_uncertainty
         return causal_entropy
 
-class RecursiveThinking:
-
         pass
 class RecursiveThinking:
     """
