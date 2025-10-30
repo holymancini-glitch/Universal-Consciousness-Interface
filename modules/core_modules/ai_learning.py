@@ -184,6 +184,7 @@ class FractalMonteCarloAgent:
 
 class RecursiveThinking:
 
+        pass
 class RecursiveThinking:
     """
     Рекурсивне мислення та метакогніція
