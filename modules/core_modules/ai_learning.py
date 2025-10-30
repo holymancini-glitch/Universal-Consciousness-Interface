@@ -183,8 +183,6 @@ class FractalMonteCarloAgent:
         return causal_entropy
 
 class RecursiveThinking:
-
-class RecursiveThinking:
     """
     Рекурсивне мислення та метакогніція
     """
@@ -552,8 +550,6 @@ class RecursiveThinking:
 # ===================================================================
 # 🍄 4. MYCELIAL NETWORK LAYER - Міцелієва Мережева Система
 # ===================================================================
-
-class MycelialNode:
 
 
 __all__ = ['FractalMonteCarloAgent', 'RecursiveThinking']
