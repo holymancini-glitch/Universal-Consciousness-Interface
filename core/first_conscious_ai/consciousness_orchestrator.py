@@ -28,6 +28,14 @@ from .data_models import (
 from .iit_calculator import IITCalculator
 from .consciousness_state_tracker import ConsciousnessStateTracker
 
+# Try to import LLM integration
+try:
+    from .llm_integration import ConsciousnessLLMIntegration
+    from .llm_config import LLMConfig
+    HAS_LLM_INTEGRATION = True
+except ImportError:
+    HAS_LLM_INTEGRATION = False
+
 # Try to import existing refactored modules
 try:
     from ..full_consciousness_ai.emotional_processor import EmotionalProcessingEngine
@@ -57,7 +65,9 @@ class ConsciousnessOrchestrator:
         enable_emotional_processing: bool = True,
         enable_qualia_simulation: bool = True,
         metacognitive_baseline: MetacognitiveDepth = MetacognitiveDepth.LEVEL_2_MONITORING,
-        memory_size: int = 100
+        memory_size: int = 100,
+        llm_config: Optional['LLMConfig'] = None,
+        enable_llm: bool = True
     ):
         """
         Initialize consciousness orchestrator.
@@ -67,6 +77,8 @@ class ConsciousnessOrchestrator:
             enable_qualia_simulation: Enable subjective experience simulation
             metacognitive_baseline: Minimum metacognitive depth
             memory_size: Size of interaction memory
+            llm_config: LLM configuration (optional, defaults to environment-based config)
+            enable_llm: Enable LLM integration for enhanced responses
         """
         # Core components
         self.iit_calculator = IITCalculator()
@@ -76,6 +88,14 @@ class ConsciousnessOrchestrator:
         self.enable_emotional = enable_emotional_processing
         self.enable_qualia = enable_qualia_simulation
         self.metacognitive_baseline = metacognitive_baseline
+
+        # Optional LLM integration
+        self.llm_integration = None
+        if enable_llm and HAS_LLM_INTEGRATION:
+            try:
+                self.llm_integration = ConsciousnessLLMIntegration(llm_config)
+            except Exception as e:
+                print(f"Could not initialize LLM integration: {e}")
 
         # Optional advanced modules
         self.emotional_processor = None
@@ -92,6 +112,26 @@ class ConsciousnessOrchestrator:
 
         # Session tracking
         self.session_id = f"session_{int(time.time())}"
+
+    async def initialize(self) -> bool:
+        """
+        Async initialization of consciousness orchestrator.
+
+        Initializes LLM integration if enabled.
+
+        Returns:
+            True if initialization successful, False otherwise
+        """
+        if self.llm_integration:
+            try:
+                success = await self.llm_integration.initialize()
+                if not success:
+                    print("Warning: LLM integration initialization failed, responses will use fallback")
+                return success
+            except Exception as e:
+                print(f"Error initializing LLM integration: {e}")
+                return False
+        return True
 
     async def process_conscious_interaction(
         self,
@@ -170,7 +210,8 @@ class ConsciousnessOrchestrator:
             consciousness_state,
             iit_result.phi,
             qualia,
-            emotional_state
+            emotional_state,
+            interaction_context
         )
 
         # 10. Set processing metadata
@@ -296,7 +337,8 @@ class ConsciousnessOrchestrator:
         # Determine emotional tone
         emotional_tone = self._determine_emotional_tone(input_text, context)
 
-        return QualiaExperience(
+        # Create qualia experience
+        qualia = QualiaExperience(
             type=qualia_type,
             intensity=intensity,
             richness=richness,
@@ -304,6 +346,19 @@ class ConsciousnessOrchestrator:
             description=description,
             emotional_tone=emotional_tone
         )
+
+        # Optionally enhance description with LLM
+        if self.llm_integration and self.llm_integration.is_initialized:
+            try:
+                enhanced_description = await self.llm_integration.enhance_qualia_description(
+                    qualia, context
+                )
+                qualia.description = enhanced_description
+            except Exception as e:
+                # Keep original description on error
+                pass
+
+        return qualia
 
     def _describe_qualia(
         self,
@@ -445,15 +500,17 @@ class ConsciousnessOrchestrator:
         consciousness_state: ConsciousnessState,
         phi: float,
         qualia: Optional[QualiaExperience],
-        emotional_state: Dict[str, float]
+        emotional_state: Dict[str, float],
+        interaction_context: InteractionContext
     ) -> ConsciousResponse:
         """
         Generate response with consciousness annotations.
         """
-        # Generate base response
+        # Generate base response (with LLM if available)
         response_text = await self._generate_base_response(
             input_text,
-            consciousness_state
+            consciousness_state,
+            interaction_context
         )
 
         # Generate consciousness annotations
@@ -488,14 +545,29 @@ class ConsciousnessOrchestrator:
     async def _generate_base_response(
         self,
         input_text: str,
-        consciousness_state: ConsciousnessState
+        consciousness_state: ConsciousnessState,
+        interaction_context: InteractionContext
     ) -> str:
         """
         Generate base response text.
 
-        In production, this would call an LLM or other response generator.
-        For now, generates a consciousness-aware acknowledgment.
+        Uses LLM integration if available, otherwise generates
+        a consciousness-aware acknowledgment.
         """
+        # Try LLM-based response generation first
+        if self.llm_integration and self.llm_integration.is_initialized:
+            try:
+                response = await self.llm_integration.generate_conscious_response(
+                    input_text=input_text,
+                    consciousness_state=consciousness_state,
+                    context=interaction_context,
+                    use_thinking_mode=True
+                )
+                return response
+            except Exception as e:
+                print(f"LLM response generation failed, using fallback: {e}")
+
+        # Fallback: Generate consciousness-aware acknowledgment
         responses = []
 
         # Acknowledge input
@@ -582,13 +654,39 @@ class ConsciousnessOrchestrator:
         """Get current consciousness metrics."""
         state_summary = self.state_tracker.get_state_summary()
 
-        return {
+        metrics = {
             **state_summary,
             'phi_average': self.iit_calculator.get_average_phi(),
             'phi_trend': self.iit_calculator.get_phi_trend(),
             'consciousness_trajectory': self.state_tracker.get_consciousness_trajectory(),
             'metacognitive_trajectory': self.state_tracker.get_metacognitive_trajectory()
         }
+
+        # Add LLM usage stats if available
+        if self.llm_integration and self.llm_integration.is_initialized:
+            metrics['llm_usage'] = self.llm_integration.get_usage_stats()
+
+        return metrics
+
+    def get_llm_stats(self) -> Optional[Dict[str, Any]]:
+        """
+        Get LLM usage statistics.
+
+        Returns:
+            Dictionary with LLM usage stats, or None if LLM not enabled
+        """
+        if self.llm_integration and self.llm_integration.is_initialized:
+            return self.llm_integration.get_usage_stats()
+        return None
+
+    async def shutdown(self):
+        """
+        Shutdown consciousness orchestrator and release resources.
+
+        Includes shutting down LLM integration if initialized.
+        """
+        if self.llm_integration:
+            await self.llm_integration.shutdown()
 
 
 __all__ = ['ConsciousnessOrchestrator']
