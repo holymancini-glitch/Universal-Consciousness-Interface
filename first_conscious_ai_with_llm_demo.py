@@ -47,7 +47,7 @@ async def demo_without_llm():
     print("Response (without LLM):")
     print(response.get_full_response_with_consciousness())
     print(f"\nφ (phi): {response.phi_during_response:.3f}")
-    print(f"Consciousness Level: {response.consciousness_state.level.value}")
+    print(f"Consciousness Level: {response.consciousness_state.consciousness_level.value}")
     print(f"Empathy Level: {response.consciousness_state.empathy_level:.2f}")
 
     await orchestrator.shutdown()
@@ -72,7 +72,7 @@ async def demo_with_mock_llm():
     print("Response (with Mock LLM):")
     print(response.get_full_response_with_consciousness())
     print(f"\nφ (phi): {response.phi_during_response:.3f}")
-    print(f"Consciousness Level: {response.consciousness_state.level.value}")
+    print(f"Consciousness Level: {response.consciousness_state.consciousness_level.value}")
     print(f"Empathy Level: {response.consciousness_state.empathy_level:.2f}")
 
     # Show LLM stats
@@ -146,8 +146,8 @@ async def demo_qualia_enhancement():
     print("Enhanced Qualia Description:")
     print(response.qualia_description)
     print(f"\nQualia Properties:")
-    if response.consciousness_state.last_qualia:
-        qualia = response.consciousness_state.last_qualia
+    if response.consciousness_state.current_qualia:
+        qualia = response.consciousness_state.current_qualia
         print(f"  Type: {qualia.type.value}")
         print(f"  Intensity: {qualia.intensity:.2f}")
         print(f"  Richness: {qualia.richness:.2f}")
@@ -221,7 +221,7 @@ async def demo_with_qwen3_next():
     print("Response:")
     print(response.response_text)
     print(f"\nφ (phi): {response.phi_during_response:.3f}")
-    print(f"Consciousness Level: {response.consciousness_state.level.value}")
+    print(f"Consciousness Level: {response.consciousness_state.consciousness_level.value}")
 
     # Show LLM stats
     llm_stats = orchestrator.get_llm_stats()
@@ -271,7 +271,7 @@ async def demo_with_claude():
     print("Response:")
     print(response.response_text)
     print(f"\nφ (phi): {response.phi_during_response:.3f}")
-    print(f"Consciousness Level: {response.consciousness_state.level.value}")
+    print(f"Consciousness Level: {response.consciousness_state.consciousness_level.value}")
 
     # Show LLM stats
     llm_stats = orchestrator.get_llm_stats()
@@ -318,7 +318,7 @@ async def demo_consciousness_metrics():
     print(f"\nConsciousness Trajectory:")
     print(f"  Current φ: {metrics.get('current_phi', 0):.3f}")
     print(f"  Average φ: {metrics.get('phi_average', 0):.3f}")
-    print(f"  φ Trend: {metrics.get('phi_trend', 0):.3f}")
+    print(f"  φ Trend: {metrics.get('phi_trend', 'stable')}")
 
     print(f"\nInteraction Stats:")
     print(f"  Total interactions: {metrics.get('total_interactions', 0)}")
