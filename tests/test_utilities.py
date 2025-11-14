@@ -179,6 +179,10 @@ class MockTorch:
         def size(self):
             return len(self.data)
 
+        def to(self, device):
+            """Mock device transfer"""
+            return self
+
         def __repr__(self):
             return f"Tensor({self.data})"
 
@@ -202,6 +206,10 @@ class MockTorch:
 
             def parameters(self):
                 return []
+
+            def to(self, device):
+                """Mock device transfer"""
+                return self
 
     @staticmethod
     def tensor(data, dtype=None, device=None):
