@@ -142,6 +142,36 @@ See the [Migration Guide](MIGRATION_GUIDE.md) for detailed instructions and exam
    python demos/demo_consciousness_system.py
    ```
 
+### Lightweight Installation (CPU-Only)
+
+The base system works perfectly on CPU without GPU acceleration. The requirements.txt includes **only lightweight dependencies** (~500MB total):
+
+- **Core libraries**: numpy, scipy, networkx (~200MB)
+- **ML basics**: scikit-learn, torch (CPU) (~200MB)
+- **Visualization**: matplotlib, plotly, seaborn (~100MB)
+
+**What's NOT included** (these are optional for advanced features):
+- ❌ CUDA/GPU libraries (~2-3GB) - Only needed for Qwen3 LLM integration
+- ❌ bitsandbytes (~100MB) - Only for model quantization
+- ❌ CUDA Quantum libraries (~500MB) - Only for quantum computing features
+
+**To install without GPU dependencies:**
+```bash
+# Standard installation (CPU-only, ~500MB)
+pip install -r requirements.txt
+
+# Skip torch entirely if you don't need neural features
+pip install -r requirements.txt --no-deps
+pip install numpy scipy networkx matplotlib pandas scikit-learn jupyter plotly seaborn
+```
+
+**For GPU-accelerated features** (Qwen3 LLM, see [QWEN3_PRODUCTION_GUIDE.md](QWEN3_PRODUCTION_GUIDE.md)):
+```bash
+# GPU version adds ~3GB
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+pip install transformers accelerate bitsandbytes
+```
+
 ## Usage
 
 ### Basic Example

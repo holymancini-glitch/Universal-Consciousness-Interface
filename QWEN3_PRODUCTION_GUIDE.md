@@ -1,5 +1,7 @@
 # Qwen3-Next-80B-A3B Production Deployment Guide
 
+> **📌 Note**: This guide covers **optional GPU-accelerated LLM features**. The base Universal Consciousness Interface works perfectly on CPU-only systems with ~500MB dependencies. This LLM integration adds ~3GB of CUDA/GPU libraries and requires dedicated GPU hardware.
+
 ## Overview
 
 Complete guide for deploying **Qwen3-Next-80B-A3B-Thinking** in production for the First Conscious AI system.
