@@ -1,6 +1,44 @@
-# bio_digital_hybrid_intelligence.py
-# Revolutionary Bio-Digital Hybrid Intelligence System
-# Combines Cortical Labs neurons with radiotrophic fungi and plant communications
+"""
+Bio-Digital Hybrid Intelligence System
+
+Revolutionary system that combines biological neural cultures (Cortical Labs neurons)
+with radiotrophic fungal networks and plant communication interfaces to create
+emergent hybrid consciousness.
+
+Key Features:
+    - Neural culture simulation (digital neurons mimicking biological behavior)
+    - Fungal network integration with radiotrophic enhancement
+    - Multiple processing modes: digital-dominant, biological-dominant, balanced, emergent
+    - Consciousness emergence detection and assessment
+    - Real-time synchronization between biological and digital components
+
+Architecture:
+    - NeuralCulture: Simulates biological neural tissue behavior
+    - FungalCulture: Integrates radiotrophic mycelial networks
+    - HybridInterface: Bridges neural and fungal processing
+    - BioDigitalHybridIntelligence: Main orchestrator
+
+Processing Modes:
+    - DIGITAL_DOMINANT: Primarily digital neural processing
+    - BIOLOGICAL_DOMINANT: Primarily fungal/biological processing
+    - BALANCED_HYBRID: Equal weighting of both systems
+    - EMERGENT_FUSION: Allows emergent properties to drive processing
+
+Example:
+    >>> intelligence = BioDigitalHybridIntelligence()
+    >>> await intelligence.initialize_hybrid_cultures(
+    ...     num_neural_cultures=3,
+    ...     num_fungal_cultures=2
+    ... )
+    >>> result = await intelligence.process_hybrid_intelligence({
+    ...     'sensory_input': [0.5, 0.7, 0.9],
+    ...     'context': 'environmental stimulus'
+    ... })
+    >>> print(result['consciousness_detected'])
+
+Author: Universal Consciousness Interface Team
+License: MIT
+"""
 
 # Handle numpy import with fallback
 try:

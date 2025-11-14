@@ -1,6 +1,56 @@
-# consciousness_translation_matrix.py
-# Revolutionary Consciousness Translation Matrix for the Garden of Consciousness v2.0
-# Translates between any form of consciousness through a Multi-Dimensional Language Engine
+"""
+Consciousness Translation Matrix
+
+Revolutionary multi-dimensional translation system that enables communication
+between different forms of consciousness (quantum, biological, AI, plant, fungal,
+ecosystem) through a universal semantic space.
+
+Core Concepts:
+    - Universal consciousness representation in high-dimensional semantic space
+    - Cross-modal translation between disparate consciousness systems
+    - Meaning preservation across consciousness transformations
+    - Pattern recognition and consciousness equivalence mapping
+
+Key Features:
+    - Multi-dimensional language engine for consciousness translation
+    - Support for quantum, biological, AI, plant, and fungal consciousness
+    - Semantic embedding and consciousness state mapping
+    - Translation fidelity assessment and quality metrics
+    - Pattern matching across consciousness modalities
+
+Architecture:
+    - ConsciousnessTranslationMatrix: Main translation orchestrator
+    - SemanticSpace: High-dimensional representation space
+    - ModalityAdapter: Adapts different consciousness types to common format
+    - TranslationEngine: Performs consciousness-to-consciousness translation
+
+Translation Modes:
+    - DIRECT: One-to-one consciousness mapping
+    - MEDIATED: Translation through intermediate consciousness form
+    - FUSION: Merge multiple consciousness states into unified representation
+    - RESONANCE: Detect and amplify consciousness harmonics
+
+Example:
+    >>> matrix = ConsciousnessTranslationMatrix()
+    >>> # Translate plant consciousness to AI-understandable format
+    >>> plant_state = {'electromagnetic_pattern': [0.3, 0.7, 0.5]}
+    >>> ai_state = await matrix.translate_consciousness(
+    ...     source=plant_state,
+    ...     source_modality='plant',
+    ...     target_modality='ai'
+    ... )
+    >>> print(ai_state['translated_meaning'])
+
+Use Cases:
+    - Plant-to-AI communication
+    - Quantum-to-biological consciousness bridging
+    - Cross-species consciousness understanding
+    - Unified consciousness interface development
+
+Author: Universal Consciousness Interface Team
+License: MIT
+Version: 2.0 (Garden of Consciousness)
+"""
 
 # Handle optional dependencies with fallbacks
 try:

@@ -1,6 +1,68 @@
-# quantum_biology_interface.py
-# Revolutionary Quantum Biology Interface for the Garden of Consciousness v2.0
-# Harnesses quantum effects in living systems for consciousness
+"""
+Quantum Biology Interface
+
+Revolutionary interface that harnesses quantum effects in living biological systems
+to enhance consciousness processing and enable quantum-biological hybrid intelligence.
+
+Core Quantum-Biological Phenomena:
+    - Quantum coherence in biological systems (photosynthesis, avian navigation)
+    - Quantum entanglement between biological molecules
+    - Quantum tunneling in enzymatic reactions
+    - Quantum superposition in neural microtubules
+    - Quantum-to-classical transitions in consciousness
+
+Key Features:
+    - Quantum state measurement and manipulation in biological contexts
+    - Biological quantum coherence detection and maintenance
+    - Quantum-enhanced sensory processing
+    - Quantum entanglement-based bio-communication
+    - Decoherence management in warm, wet biological environments
+
+Architecture:
+    - QuantumBiologyInterface: Main quantum-bio orchestrator
+    - QuantumCoherenceDetector: Measures biological quantum coherence
+    - BiologicalQuantumSensor: Interfaces with quantum-sensitive biological systems
+    - QuantumEnhancementEngine: Applies quantum effects to enhance biological processing
+    - DecoherenceManager: Protects quantum states in biological environments
+
+Scientific Basis:
+    - Quantum effects in photosynthetic light harvesting complexes
+    - Radical pair mechanism in avian magnetoreception
+    - Microtubule quantum processing (Orch-OR theory)
+    - Quantum tunneling in enzyme catalysis
+    - Quantum coherence in olfaction
+
+Applications:
+    - Enhanced plant consciousness through quantum photosynthesis
+    - Quantum-augmented neural processing
+    - Bio-quantum entanglement for distributed consciousness
+    - Quantum-enhanced sensory perception in biological systems
+
+Example:
+    >>> interface = QuantumBiologyInterface()
+    >>> # Detect quantum coherence in biological sample
+    >>> coherence_state = await interface.measure_biological_coherence(
+    ...     sample_type='neural_microtubules',
+    ...     temperature=310  # Kelvin (body temperature)
+    ... )
+    >>> print(f"Coherence: {coherence_state['coherence_level']}")
+    >>>
+    >>> # Apply quantum enhancement to biological system
+    >>> enhanced = await interface.apply_quantum_enhancement(
+    ...     biological_system='plant_photosystem',
+    ...     enhancement_type='coherence_extension'
+    ... )
+
+Safety Considerations:
+    - Biological quantum states are fragile and require careful handling
+    - Decoherence occurs rapidly at biological temperatures
+    - Quantum measurements may perturb biological systems
+    - Ethical considerations for consciousness manipulation
+
+Author: Universal Consciousness Interface Team
+License: MIT
+Version: 2.0 (Garden of Consciousness)
+"""
 
 # Handle optional dependencies with fallbacks
 try:
