@@ -2,6 +2,8 @@
 
 **Deploy First Conscious AI in production with Qwen3-Next in 30 minutes.**
 
+> **💡 Optional Feature**: This is for GPU-accelerated LLM integration only (~3GB CUDA libraries). The base system runs fine on CPU with ~500MB dependencies. See [README.md](README.md#lightweight-installation-cpu-only) for lightweight installation.
+
 ---
 
 ## Why Qwen3-Next for Production?
