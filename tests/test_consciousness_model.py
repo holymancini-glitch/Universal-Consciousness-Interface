@@ -8,11 +8,13 @@ This test script runs the consciousness model without dependencies on existing m
 import asyncio
 import sys
 import os
+import pytest
 
 # Add the current directory to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Test basic functionality
+@pytest.mark.asyncio
 async def test_consciousness_model():
     """Test the consciousness model functionality"""
     
@@ -91,9 +93,10 @@ async def test_consciousness_model():
         return False
 
 
+@pytest.mark.asyncio
 async def test_individual_components():
     """Test individual consciousness components"""
-    
+
     print("\n🔬 Testing Individual Consciousness Components...")
     
     try:

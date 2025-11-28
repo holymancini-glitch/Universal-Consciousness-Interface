@@ -38,11 +38,12 @@ class TestHybridProcessingMode(unittest.TestCase):
         self.assertEqual(HybridProcessingMode.BIOLOGICAL_DOMINANT.value, "biological_dominant")
         self.assertEqual(HybridProcessingMode.BALANCED_HYBRID.value, "balanced_hybrid")
         self.assertEqual(HybridProcessingMode.EMERGENT_FUSION.value, "emergent_fusion")
+        self.assertEqual(HybridProcessingMode.RADIATION_ACCELERATED.value, "radiation_accelerated")
 
     def test_processing_mode_count(self):
         """Test that all expected modes are present"""
         modes = list(HybridProcessingMode)
-        self.assertEqual(len(modes), 4)
+        self.assertEqual(len(modes), 5)  # Updated: now includes RADIATION_ACCELERATED
 
 
 class TestNeuralCulture(unittest.TestCase):

@@ -267,11 +267,18 @@ class EnhancedMycelialEngine:
                                             pattern_diversity * 0.2)
     
     def measure_network_connectivity(self) -> float:
-        """Measure network connectivity"""
+        """Measure network connectivity (returns value in [0, 1])"""
         if len(self.nodes) == 0:
-            return 0
-        
-        edge_density = (2 * self.network_graph.number_of_edges()) / (len(self.nodes) * (len(self.nodes) - 1))
+            return 0.0
+
+        if len(self.nodes) == 1:
+            return 1.0  # Single node is fully connected to itself
+
+        # Calculate edge density - clamp to [0, 1] range
+        max_edges = len(self.nodes) * (len(self.nodes) - 1)
+        actual_edges = 2 * self.network_graph.number_of_edges()
+        edge_density = min(1.0, actual_edges / max_edges)
+
         self.network_coherence = edge_density
         return edge_density
     

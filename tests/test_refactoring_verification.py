@@ -14,7 +14,7 @@ BLUE = '\033[94m'
 YELLOW = '\033[93m'
 RESET = '\033[0m'
 
-def test_result(test_name, success, error_msg=""):
+def print_print_test_result(test_name, success, error_msg=""):
     """Print test result with color"""
     if success:
         print(f"{GREEN}✓{RESET} {test_name}")
@@ -39,9 +39,9 @@ def test_planetary_ecosystem_imports():
             EcosystemNode,
             NetworkAnalyzer
         )
-        results.append(test_result("Old-style import", True))
+        results.append(print_print_test_result("Old-style import", True))
     except Exception as e:
-        results.append(test_result("Old-style import", False, str(e)))
+        results.append(print_print_test_result("Old-style import", False, str(e)))
 
     # Test new-style import
     try:
@@ -51,17 +51,17 @@ def test_planetary_ecosystem_imports():
             EcosystemNode,
             NetworkAnalyzer
         )
-        results.append(test_result("New-style import", True))
+        results.append(print_print_test_result("New-style import", True))
     except Exception as e:
-        results.append(test_result("New-style import", False, str(e)))
+        results.append(print_print_test_result("New-style import", False, str(e)))
 
     # Test module-specific imports
     try:
         from core.planetary_ecosystem.network_core import PlanetaryEcosystemConsciousnessNetwork
         from core.planetary_ecosystem.data_models import EcosystemType
-        results.append(test_result("Module-specific imports", True))
+        results.append(print_print_test_result("Module-specific imports", True))
     except Exception as e:
-        results.append(test_result("Module-specific imports", False, str(e)))
+        results.append(print_print_test_result("Module-specific imports", False, str(e)))
 
     return all(results)
 
@@ -79,9 +79,9 @@ def test_adaptive_learning_imports():
             LearningMetrics,
             integrate_adaptive_learning
         )
-        results.append(test_result("Old-style import", True))
+        results.append(print_print_test_result("Old-style import", True))
     except Exception as e:
-        results.append(test_result("Old-style import", False, str(e)))
+        results.append(print_print_test_result("Old-style import", False, str(e)))
 
     # Test new-style import
     try:
@@ -91,17 +91,17 @@ def test_adaptive_learning_imports():
             PerformanceAssessor,
             CreativeEngine
         )
-        results.append(test_result("New-style import", True))
+        results.append(print_print_test_result("New-style import", True))
     except Exception as e:
-        results.append(test_result("New-style import", False, str(e)))
+        results.append(print_print_test_result("New-style import", False, str(e)))
 
     # Test module-specific imports
     try:
         from core.adaptive_learning.learning_core import AdaptiveLearningSystem
         from core.adaptive_learning.data_models import LearningPhase
-        results.append(test_result("Module-specific imports", True))
+        results.append(print_print_test_result("Module-specific imports", True))
     except Exception as e:
-        results.append(test_result("Module-specific imports", False, str(e)))
+        results.append(print_print_test_result("Module-specific imports", False, str(e)))
 
     return all(results)
 
@@ -119,9 +119,9 @@ def test_full_consciousness_ai_imports():
             EmotionalState,
             SubjectiveExperience
         )
-        results.append(test_result("Old-style import", True))
+        results.append(print_print_test_result("Old-style import", True))
     except Exception as e:
-        results.append(test_result("Old-style import", False, str(e)))
+        results.append(print_print_test_result("Old-style import", False, str(e)))
 
     # Test new-style import
     try:
@@ -131,17 +131,17 @@ def test_full_consciousness_ai_imports():
             MetaCognitionEngine,
             ConsciousMemorySystem
         )
-        results.append(test_result("New-style import", True))
+        results.append(print_print_test_result("New-style import", True))
     except Exception as e:
-        results.append(test_result("New-style import", False, str(e)))
+        results.append(print_print_test_result("New-style import", False, str(e)))
 
     # Test module-specific imports
     try:
         from core.full_consciousness_ai.consciousness_core import FullConsciousnessAIModel
         from core.full_consciousness_ai.data_models import ConsciousnessState
-        results.append(test_result("Module-specific imports", True))
+        results.append(print_print_test_result("Module-specific imports", True))
     except Exception as e:
-        results.append(test_result("Module-specific imports", False, str(e)))
+        results.append(print_print_test_result("Module-specific imports", False, str(e)))
 
     return all(results)
 
@@ -155,17 +155,17 @@ def test_class_instantiation():
     try:
         from core.planetary_ecosystem import PlanetaryEcosystemConsciousnessNetwork
         network = PlanetaryEcosystemConsciousnessNetwork()
-        results.append(test_result("PlanetaryEcosystemConsciousnessNetwork instantiation", True))
+        results.append(print_print_test_result("PlanetaryEcosystemConsciousnessNetwork instantiation", True))
     except Exception as e:
-        results.append(test_result("PlanetaryEcosystemConsciousnessNetwork instantiation", False, str(e)))
+        results.append(print_print_test_result("PlanetaryEcosystemConsciousnessNetwork instantiation", False, str(e)))
 
     # Test full consciousness AI
     try:
         from core.full_consciousness_ai import FullConsciousnessAIModel
         model = FullConsciousnessAIModel(hidden_dim=64, device='cpu', integrate_existing_modules=False)
-        results.append(test_result("FullConsciousnessAIModel instantiation", True))
+        results.append(print_print_test_result("FullConsciousnessAIModel instantiation", True))
     except Exception as e:
-        results.append(test_result("FullConsciousnessAIModel instantiation", False, str(e)))
+        results.append(print_print_test_result("FullConsciousnessAIModel instantiation", False, str(e)))
 
     return all(results)
 
@@ -180,27 +180,27 @@ def test_module_attributes():
         import core.planetary_ecosystem as pe
         assert hasattr(pe, '__version__')
         assert hasattr(pe, '__all__')
-        results.append(test_result("Planetary ecosystem module attributes", True))
+        results.append(print_test_result("Planetary ecosystem module attributes", True))
     except Exception as e:
-        results.append(test_result("Planetary ecosystem module attributes", False, str(e)))
+        results.append(print_test_result("Planetary ecosystem module attributes", False, str(e)))
 
     # Test adaptive learning
     try:
         import core.adaptive_learning as al
         assert hasattr(al, '__version__')
         assert hasattr(al, '__all__')
-        results.append(test_result("Adaptive learning module attributes", True))
+        results.append(print_test_result("Adaptive learning module attributes", True))
     except Exception as e:
-        results.append(test_result("Adaptive learning module attributes", False, str(e)))
+        results.append(print_test_result("Adaptive learning module attributes", False, str(e)))
 
     # Test full consciousness AI
     try:
         import core.full_consciousness_ai as fca
         assert hasattr(fca, '__version__')
         assert hasattr(fca, '__all__')
-        results.append(test_result("Full consciousness AI module attributes", True))
+        results.append(print_test_result("Full consciousness AI module attributes", True))
     except Exception as e:
-        results.append(test_result("Full consciousness AI module attributes", False, str(e)))
+        results.append(print_test_result("Full consciousness AI module attributes", False, str(e)))
 
     return all(results)
 
