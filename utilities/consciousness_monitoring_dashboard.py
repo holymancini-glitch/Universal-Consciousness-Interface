@@ -16,6 +16,13 @@ import threading
 import sys
 import os
 
+# Process monitoring for real memory usage metrics
+try:
+    import psutil
+    PSUTIL_AVAILABLE = True
+except ImportError:
+    PSUTIL_AVAILABLE = False
+
 # Add core modules to path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'core'))
 
@@ -400,7 +407,29 @@ class ConsciousnessMonitoringServer:
             consciousness_markers=hybrid_result['consciousness_assessment'].get('consciousness_markers', []) if hybrid_result else [],
             emergent_intelligence_score=hybrid_result['consciousness_assessment'].get('emergent_intelligence_score', 0) if hybrid_result else 0
         )
-    
+
+    def _get_memory_usage_mb(self) -> float:
+        """Get current process memory usage in megabytes"""
+        if PSUTIL_AVAILABLE:
+            try:
+                process = psutil.Process()
+                memory_info = process.memory_info()
+                return memory_info.rss / (1024 * 1024)  # Convert bytes to MB
+            except Exception:
+                pass
+        return 0.0
+
+    def _get_radiation_exposure_level(self) -> float:
+        """Get current radiation exposure level from radiotrophic engine"""
+        if self.hybrid_intelligence:
+            try:
+                radiotrophic_engine = self.hybrid_intelligence.radiotrophic_engine
+                if radiotrophic_engine and hasattr(radiotrophic_engine, 'radiation_environment'):
+                    return radiotrophic_engine.radiation_environment.ambient_radiation
+            except Exception:
+                pass
+        return 1.0  # Default background radiation level
+
     def _create_system_metrics(self, cycle: int, cycle_time_ms: float) -> SystemMetrics:
         """Create system metrics snapshot"""
         return SystemMetrics(
@@ -411,9 +440,9 @@ class ConsciousnessMonitoringServer:
             ) if hasattr(self.data_processor.consciousness_history, 'count') else 0,
             safety_violations=len([s for s in self.data_processor.consciousness_history if 'ERROR' in s.safety_status]),
             average_cycle_time_ms=cycle_time_ms,
-            memory_usage_mb=0.0,  # Placeholder
+            memory_usage_mb=self._get_memory_usage_mb(),
             active_interfaces=len(self.hybrid_intelligence.hybrid_interfaces) if self.hybrid_intelligence else 0,
-            radiation_exposure_level=1.0  # Placeholder
+            radiation_exposure_level=self._get_radiation_exposure_level()
         )
     
     def get_dashboard_data(self) -> Dict[str, Any]:
