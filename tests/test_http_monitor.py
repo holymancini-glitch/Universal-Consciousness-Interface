@@ -5,10 +5,10 @@ import os
 import sys
 import urllib.request
 
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from demo_unified_interface import UnifiedDemoPipeline
-from http_monitor import HTTPMonitor
+from demos.demo_unified_interface import UnifiedDemoPipeline
+from utilities.http_monitor import HTTPMonitor
 
 
 def test_http_monitor_serves_metrics():

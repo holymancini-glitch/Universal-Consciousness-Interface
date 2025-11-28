@@ -6,10 +6,12 @@ Simple Consciousness Model Test - No Unicode Issues
 import asyncio
 import sys
 import os
+import pytest
 
 # Add the current directory to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+@pytest.mark.asyncio
 async def test_consciousness_model():
     """Test the consciousness model functionality"""
     

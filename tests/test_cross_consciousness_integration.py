@@ -9,11 +9,11 @@ import sys
 import os
 from datetime import datetime
 
-# Add core modules to path
-sys.path.append(os.path.join(os.path.dirname(__file__), 'core'))
+# Add project root to path
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from universal_consciousness_orchestrator import UniversalConsciousnessOrchestrator, UniversalTranslationMatrix
-from enhanced_cross_consciousness_protocol import EnhancedUniversalTranslationMatrix, ConsciousnessMessage, ConsciousnessType, CommunicationMode
+from core.universal_consciousness_orchestrator import UniversalConsciousnessOrchestrator, UniversalTranslationMatrix
+from core.enhanced_cross_consciousness_protocol import EnhancedUniversalTranslationMatrix, ConsciousnessMessage, ConsciousnessType, CommunicationMode
 
 async def test_integrated_cross_consciousness_communication():
     """Test the integrated cross-consciousness communication system"""
