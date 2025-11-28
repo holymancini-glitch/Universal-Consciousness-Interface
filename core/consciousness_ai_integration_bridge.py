@@ -86,15 +86,25 @@ class ConsciousnessAIIntegrationBridge:
     - Safety and ethics frameworks
     """
     
-    def __init__(self, 
+    def __init__(self,
                  consciousness_ai_config: Dict[str, Any] = None,
                  enable_existing_modules: bool = True):
-        
+
         self.enable_existing_modules = enable_existing_modules and EXISTING_MODULES_AVAILABLE
-        
+
         # Initialize the Full Consciousness AI Model
-        ai_config = consciousness_ai_config or {'hidden_dim': 512, 'device': 'cpu'}
-        self.consciousness_ai = StandaloneConsciousnessAI(**ai_config)
+        # Filter config to only include valid StandaloneConsciousnessAI parameters
+        ai_config = consciousness_ai_config or {}
+        valid_ai_params = {'hidden_dim', 'device'}
+        filtered_config = {k: v for k, v in ai_config.items() if k in valid_ai_params}
+
+        # Set defaults if not provided
+        if 'hidden_dim' not in filtered_config:
+            filtered_config['hidden_dim'] = 512
+        if 'device' not in filtered_config:
+            filtered_config['device'] = 'cpu'
+
+        self.consciousness_ai = StandaloneConsciousnessAI(**filtered_config)
         
         # Initialize existing modules if available
         self.existing_modules = {}
